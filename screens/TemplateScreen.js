@@ -5,19 +5,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class TemplateScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const { navigate } = navigation;
-    return {
-      title: 'Home',
-      tabBarIcon: ({ tintColor }) => {
-        return <Icon name="favorite" size={30} color={tintColor} />;
-      },
-      drawerLabel: 'Super Templates',
-      drawerIcon: ({ tintColor }) => (
-        <Icon name="favorite" size={20} color={tintColor} />
-      ),
-    };
-  }
 
   render() {
     return (

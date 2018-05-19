@@ -3,10 +3,10 @@ import { TabNavigator } from 'react-navigation';
 
 // Screens
 // Only one for now, add more as required
-import HealthCenter from './health_center'
+import TaskFeed from './TaskFeed'
 
 // Tabs
-//import Tab from '../../components/tabs/tab'
+import Tab from '../../components/tabs/tab'
 import { Icon } from 'react-native-elements';
 
 // TabNavigator options
@@ -26,10 +26,10 @@ const options = {
 
 export default TabNavigator({
 
-    List:       { screen: HealthCenter, navigationOptions: { tabBarLabel: '', tabBarIcon: ({ tintColor }) => (<Icon name="favorite" size={30} color={tintColor} />) }},
-    Groups:     { screen: HealthCenter, navigationOptions: { tabBarLabel: '', tabBarIcon: ({ tintColor }) => (<Icon name="favorite" size={30} color={tintColor} />) }},
-    Stats:      { screen: HealthCenter, navigationOptions: { tabBarLabel: '', tabBarIcon: ({ tintColor }) => (<Icon name="favorite" size={30} color={tintColor} />) }},
-    User:       { screen: HealthCenter, navigationOptions: { tabBarLabel: '', tabBarIcon: ({ tintColor }) => (<Icon name="favorite" size={30} color={tintColor} />) }},
-    Admin:      { screen: HealthCenter, navigationOptions: { tabBarLabel: '', tabBarIcon: ({ tintColor }) => (<Icon name="favorite" size={30} color={tintColor} />) }},
+    List:       { screen: TaskFeed, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="home" />) }},
+    Groups:     { screen: TaskFeed, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="chat" />) }},
+    Stats:      { screen: TaskFeed, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="show-chart" />) }},
+    User:       { screen: TaskFeed, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="person" />) }},
+    Admin:      { screen: TaskFeed, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="settings" />) }},
 
 }, options);
