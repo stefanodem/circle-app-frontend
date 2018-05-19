@@ -19,7 +19,6 @@ import { tasks } from '../../testData/testData';
 
 //TODO: Hook up to backend
 export const fetchUserTasks = () => {
-  console.log(tasks)
   return new Promise(resolve => setTimeout(() => resolve(tasks), 100));
 }
 

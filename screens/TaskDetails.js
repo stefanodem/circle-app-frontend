@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, AsyncStorage, FlatList, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
-import { Card, ListItem, Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Card, ListItem, Button, Avatar } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import ReadMore from 'react-native-read-more-text';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
 
-const TaskDetail = ({ title, text, icon }) => {
+const TaskDetail = ({ title, text, icon, iconColor }) => {
   return (
     <View
       style={styles.section} >
       <Icon
         name={ icon }
         style={[ styles.icon ]}
-        color='grey' />
+        color={ iconColor } />
       <View
         style={{ paddingLeft: 10 }} >
         <Text
@@ -27,6 +27,44 @@ const TaskDetail = ({ title, text, icon }) => {
               { text }
             </Text>
           </ReadMore>
+      </View>
+    </View>
+  )
+}
+
+const TaskAssignees = ({ title, icon, iconColor }) => {
+  return (
+    <View
+      style={styles.section} >
+      <Icon
+        name={ icon }
+        style={[ styles.icon ]}
+        color={ iconColor } />
+      <View
+        style={{ paddingLeft: 10 }} >
+        <Text
+          style={styles.sectionTitle} >
+          { title }
+        </Text>
+        <View
+          style={styles.avatars} >
+          <Avatar
+            containerStyle={{ marginRight: 10 }}
+            small
+            rounded
+            source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
+            onPress={() => console.log("Works!")}
+            activeOpacity={0.7}
+          />
+          <Avatar
+            containerStyle={{ marginRight: 10 }}
+            small
+            rounded
+            source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg"}}
+            onPress={() => console.log("Works!")}
+            activeOpacity={0.7}
+          />
+        </View>
       </View>
     </View>
   )
@@ -47,7 +85,8 @@ class TaskDetailsScreen extends Component {
 
   render() {
     const isFetching = this.props.task.isFetching;
-    const taskDetail = this.props.task.taskDetail;
+    const taskId = this.props.navigation.state.params;
+    const taskDetails = this.props.task.tasks[taskId];
 
     if (isFetching) {
       return (
@@ -62,19 +101,33 @@ class TaskDetailsScreen extends Component {
         style={styles.container} >
 
         <TaskDetail
-          title={'Description'}
-          text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum"}
-          icon={'ios-add-circle-outline'} />
+          title={'Diagnosis / Problem'}
+          text={ taskDetails.diagnosis }
+          icon={'local-hospital'}
+          iconColor={'red'} />
 
         <TaskDetail
-          title={'Diagnosis'}
-          text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum"}
-          icon={'ios-add-circle-outline'} />
+          title={'Goal'}
+          text={ taskDetails.goal }
+          icon={'event-available'}
+          iconColor={'green'} />
 
         <TaskDetail
-          title={'Treatment'}
-          text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum"}
-          icon={'ios-add-circle-outline'} />
+          title={'Task'}
+          text={ taskDetails.taskDescription }
+          icon={'assignment'}
+          iconColor={'brown'} />
+
+        <TaskDetail
+          title={'Time / Interval'}
+          text={ taskDetails.time }
+          icon={'schedule'}
+          iconColor={'black'} />
+
+        <TaskAssignees
+          title={'Circlers'}
+          icon={'people'}
+          iconColor={'blue'} />
 
       </View>
     );
@@ -94,13 +147,14 @@ const styles = StyleSheet.create({
   },
   section: {
     flexDirection: 'row',
-    paddingLeft: 20,
+    paddingLeft: 10,
     paddingRight: 50,
     paddingTop: 20
   },
   sectionTitle: {
     fontSize: 18,
     color: 'grey',
+    paddingBottom: 5,
   },
   sectionText: {
     fontSize: 16,
@@ -108,9 +162,11 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   icon: {
-    fontSize: 25
+    fontSize: 22
   },
-
+  avatars: {
+    flexDirection: 'row',
+  },
 });
 
 export default connect(mapStateToProps, actions)(TaskDetailsScreen);

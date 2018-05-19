@@ -1,18 +1,38 @@
 export const tasks = {
     1: {
       id: 1,
-      taskBody: 'Very important task'
+      taskTitle: 'Very important task',
+      diagnosis: 'gagi',
+      goal: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
+      taskDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum",
+      time: 'Every day',
+      circlers: [],
     },
     2: {
       id: 2,
-      taskBody: 'Very important task'
+      taskTitle: 'Very important task',
+      diagnosis: 'bisi',
+      goal: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
+      taskDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum",
+      time: 'Every day',
+      circlers: [],
     },
     3: {
       id: 3,
-      taskBody: 'Very important task'
+      taskTitle: 'Very important task',
+      diagnosis: 'fudigagi',
+      goal: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
+      taskDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum",
+      time: 'Every day',
+      circlers: [],
     },
     4: {
       id: 4,
-      taskBody: 'Very important task'
+      taskTitle: 'Very important task',
+      diagnosis: 'bisipimmel',
+      goal: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
+      taskDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum",
+      time: 'Every day',
+      circlers: [],
     },
 }

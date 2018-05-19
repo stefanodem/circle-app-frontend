@@ -48,8 +48,6 @@ export function fetchAndHandleTasks (uid) {
 }
 
 export const updateNewTaskText = (fieldName, text) => {
-  console.log(fieldName)
-  console.log(text)
   return {
     type: UPDATE_NEWTASK_TEXT,
     fieldName,

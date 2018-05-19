@@ -34,12 +34,12 @@ class TaskFeedScreen extends Component {
 
     return (
       <TouchableWithoutFeedback
-        onPress={ () => navigate('TaskDetails') } >
+        onPress={ () => navigate('TaskDetails', item.id) } >
 
         <Card>
 
           <Text style={{ marginBottom: 30 }}>
-            {item.taskBody}
+            {item.taskTitle}
           </Text>
 
           <CardMetrics />
