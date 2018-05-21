@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import template from './template_reducer';
 import task from './task_reducer';
+import assessment from './assessment_reducer';
 
 export default combineReducers({
-  template, task
+  task, assessment,
 })

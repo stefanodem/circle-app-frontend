@@ -15,7 +15,11 @@ class NewTaskScreen extends Component {
       //TODO: connect navigation to redux and get care-receiver name
       //can be String, React Element or React Componen
       //header: can be React Element or a function --> for customizing headers
-    };
+    }
+  }
+
+  componentDidMount() {
+    this.props.removeNewTaskText();
   }
 
   render() {
@@ -26,7 +30,7 @@ class NewTaskScreen extends Component {
       <View>
 
         <View>
-          <FormLabel>Task Name</FormLabel>
+          <FormLabel>Name</FormLabel>
           <FormInput onChangeText={(text) => updateNewTaskText('name', text)}/>
         </View>
 
@@ -36,8 +40,23 @@ class NewTaskScreen extends Component {
         </View>
 
         <View>
+          <FormLabel>Diagnosis</FormLabel>
+          <FormInput onChangeText={(text) => updateNewTaskText('diagnosis', text)}/>
+        </View>
+
+        <View>
+          <FormLabel>Goal</FormLabel>
+          <FormInput onChangeText={(text) => updateNewTaskText('goal', text)}/>
+        </View>
+
+        <View>
           <FormLabel>Complete By</FormLabel>
           <FormInput onChangeText={(text) => updateNewTaskText('completeDate', text)}/>
+        </View>
+
+        <View>
+          <FormLabel>Interval</FormLabel>
+          <FormInput onChangeText={(text) => updateNewTaskText('interval', text)}/>
         </View>
 
         <View>

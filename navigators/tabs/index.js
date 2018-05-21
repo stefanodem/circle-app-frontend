@@ -3,7 +3,8 @@ import { TabNavigator } from 'react-navigation';
 
 // Screens
 // Only one for now, add more as required
-import TaskFeed from './TaskFeed'
+import TaskFeed from './TaskFeed';
+import Assessment from './Assessment';
 
 // Tabs
 import Tab from '../../components/tabs/tab'
@@ -26,7 +27,7 @@ const options = {
 
 export default TabNavigator({
 
-    List:       { screen: TaskFeed, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="home" />) }},
+    List:       { screen: Assessment, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="home" />) }},
     Groups:     { screen: TaskFeed, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="chat" />) }},
     Stats:      { screen: TaskFeed, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="show-chart" />) }},
     User:       { screen: TaskFeed, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="person" />) }},

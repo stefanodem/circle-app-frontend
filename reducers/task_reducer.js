@@ -4,16 +4,20 @@ import {
   FETCHING_TASKS_FAILURE,
   REMOVE_FETCHING_TASKS,
   UPDATE_NEWTASK_TEXT,
+  REMOVE_NEWTASK_TEXT,
 } from '../actions/types';
 
 const initialState = {
   isFetching: true,
   error: '',
-  tasks: {},
+  tasks: '',
   newTask: {
     name: '',
     description: '',
+    diagnosis: '',
+    goal: '',
     completeDate: '',
+    interval: '',
     assignee: '',
   }
 }
@@ -50,7 +54,7 @@ export default function(state = initialState, action) {
             ...state.newTask,
             name: action.text,
           }
-        };
+        }
       } else if (action.fieldName == 'description') {
         return {
           ...state,
@@ -58,7 +62,23 @@ export default function(state = initialState, action) {
             ...state.newTask,
             description: action.text,
           }
-        };
+        }
+      } else if (action.fieldName == 'diagnosis') {
+        return {
+          ...state,
+          newTask: {
+            ...state.newTask,
+            diagnosis: action.text,
+          }
+        }
+      } else if (action.fieldName == 'goal') {
+        return {
+          ...state,
+          newTask: {
+            ...state.newTask,
+            goal: action.text,
+          }
+        }
       } else if (action.fieldName == 'completeDate') {
         return {
           ...state,
@@ -66,7 +86,15 @@ export default function(state = initialState, action) {
             ...state.newTask,
             completeDate: action.text,
           }
-        };
+        }
+      } else if (action.fieldName == 'interval') {
+        return {
+          ...state,
+          newTask: {
+            ...state.newTask,
+            interval: action.text,
+          }
+        }
       } else if (action.fieldName == 'assignee') {
         return {
           ...state,
@@ -74,7 +102,20 @@ export default function(state = initialState, action) {
             ...state.newTask,
             assignee: action.text,
           }
-        };
+        }
+      };
+    case REMOVE_NEWTASK_TEXT:
+      return {
+        ...state,
+        newTask: {
+          name: '',
+          description: '',
+          diagnosis: '',
+          goal: '',
+          completeDate: '',
+          interval: '',
+          assignee: '',
+        }
       };
     default:
       return state;

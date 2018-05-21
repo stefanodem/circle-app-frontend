@@ -4,6 +4,7 @@ import {
   FETCHING_TASKS_FAILURE,
   REMOVE_FETCHING_TASKS,
   UPDATE_NEWTASK_TEXT,
+  REMOVE_NEWTASK_TEXT,
 } from './types';
 
 import {
@@ -32,13 +33,13 @@ function fetchingTasksFailure (error) {
   }
 }
 
-export function removeFetchingUser () {
+export function removeFetchingUser() {
   return {
     type: REMOVE_FETCHING_TASKS,
   }
 }
 
-export function fetchAndHandleTasks (uid) {
+export function fetchAndHandleTasks(uid) {
   return function (dispatch) {
     dispatch(fetchingTasks())
     return fetchUserTasks(uid)
@@ -52,5 +53,11 @@ export const updateNewTaskText = (fieldName, text) => {
     type: UPDATE_NEWTASK_TEXT,
     fieldName,
     text,
+  }
+}
+
+export function removeNewTaskText() {
+  return {
+    type: REMOVE_NEWTASK_TEXT,
   }
 }

@@ -36,3 +36,65 @@ export const tasks = {
       circlers: [],
     },
 }
+
+export const assessment_cha = {
+  1: {
+    id: 1,
+    section: 'C',
+    title: 'Cognitive skills for daily decision making',
+    description: 'Making decisions regarding tasks of daily life, e.g. when to get up or have meals, which clothes to wear, or activites to do',
+    responseType: 'ordinal-scale',
+    responses: [
+      {title: 'Independent', description: 'Decisions consistens, reasonable and safe'},
+      {title: 'Modified independence', description: 'Some difficulty in new situations only'},
+      {title: 'Minimally impaired', description: 'In specific recurring situations, deicsions become poor or unsafe; cues / supervision necessary at those times'},
+      {title: 'Severly impaired', description: 'Never or rarely makes decisions'},
+      {title: 'No discernable consciousness', description: ''},
+    ],
+    hasSubQuestions: false,
+    subQuestions: undefined,
+  },
+  2: {
+    id: 2,
+    section: 'C',
+    title: 'Memory / recall ability',
+    description: 'Ability to recall of what was learned or known',
+    responseType: 'boolean',
+    responses: [
+      {title: 'Yes, memory ok', description: ''},
+      {title: 'Memory problem', description: ''},
+    ],
+    hasSubQuestions: true,
+    subQuestions: {
+      a: {
+        title: 'Short-term memory',
+        description: 'Seems / appears to recall after 5 minutes',
+        responseType: 'boolean',
+        responses: [
+          {title: 'Yes, memory ok', description: ''},
+          {title: 'Memory problem', description: ''},
+        ]
+      },
+      b: {
+        title: 'Short-term memory',
+        description: 'Seems / appears to recall after 5 minutes',
+        responseType: 'boolean',
+        responses: [
+          {title: 'Yes, memory ok', description: ''},
+          {title: 'Memory problem', description: ''},
+        ]
+      },
+      c: {
+        title: 'Short-term memory',
+        description: 'Seems / appears to recall after 5 minutes',
+        responseType: 'boolean',
+        responses: [
+          {title: 'Yes, memory ok', description: ''},
+          {title: 'Memory problem', description: ''},
+        ]
+      },
+    },
+  },
+}
+
+const responseTypes = ['boolean', 'ordinal-scale', 'likert-scale', 'matrix', 'open', 'multi-option']

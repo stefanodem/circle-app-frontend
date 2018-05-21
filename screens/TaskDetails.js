@@ -101,6 +101,12 @@ class TaskDetailsScreen extends Component {
         style={styles.container} >
 
         <TaskDetail
+          title={'Task'}
+          text={ taskDetails.taskDescription }
+          icon={'assignment'}
+          iconColor={'brown'} />
+
+        <TaskDetail
           title={'Diagnosis / Problem'}
           text={ taskDetails.diagnosis }
           icon={'local-hospital'}
@@ -111,12 +117,6 @@ class TaskDetailsScreen extends Component {
           text={ taskDetails.goal }
           icon={'event-available'}
           iconColor={'green'} />
-
-        <TaskDetail
-          title={'Task'}
-          text={ taskDetails.taskDescription }
-          icon={'assignment'}
-          iconColor={'brown'} />
 
         <TaskDetail
           title={'Time / Interval'}
