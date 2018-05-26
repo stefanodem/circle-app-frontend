@@ -3,13 +3,25 @@ import {
   FETCHING_ASSESSMENT_SUCCESS,
   FETCHING_ASSESSMENT_FAILURE,
   REMOVE_FETCHING_ASSESSMENT,
+  UPDATE_RESPONSE,
 } from '../actions/types';
 
 const initialState = {
   isFetching: true,
   error: '',
   assessment: '',
+  responses: '',
   currentQuestion: '',
+  currentResponse: '',
+}
+
+const RESPONSES_TEST = {
+  1: {
+    0: 'Independent',
+  },
+  2: {
+
+  },
 }
 
 export default function(state = initialState, action) {
@@ -37,6 +49,11 @@ export default function(state = initialState, action) {
         ...state,
         isFetching: false,
       };
+    case UPDATE_RESPONSE:
+      return {
+        ...state,
+        currentResponse: action.response,
+      }
     default:
       return state;
   }

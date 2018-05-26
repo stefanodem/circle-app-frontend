@@ -3,7 +3,7 @@ import {
   FETCHING_ASSESSMENT_SUCCESS,
   FETCHING_ASSESSMENT_FAILURE,
   REMOVE_FETCHING_ASSESSMENT,
-
+  UPDATE_RESPONSE,
 } from './types';
 
 import {
@@ -43,5 +43,12 @@ export function fetchAndHandleAssessment(assessmentType) {
     return fetchAssessment(assessmentType)
       .then((assessment) => dispatch(fetchingAssessmentSuccess(assessment)))
       .catch((error) => dispatch(fetchingAssessmentFailure(error)))
+  }
+}
+
+export const updateResponse = (value) => {
+  return {
+    type: UPDATE_RESPONSE,
+    response: Math.floor(value),
   }
 }

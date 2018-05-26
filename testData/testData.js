@@ -97,4 +97,4 @@ export const assessment_cha = {
   },
 }
 
-const responseTypes = ['boolean', 'ordinal-scale', 'likert-scale', 'matrix', 'open', 'multi-option']
+const responseTypes = ['boolean', 'ordinal-scale', 'likert-scale', 'interval-scale', 'matrix', 'open', 'multi-option']
