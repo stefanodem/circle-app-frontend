@@ -70,9 +70,9 @@ class NewTaskScreen extends Component {
             raised
             fontSize={18}
             icon={{name: 'check'}}
-            backgroundColor='green'
-            title='Submit'
-            onPress={() => console.log('Submitted')} />
+            backgroundColor={'green'}
+            title={'Submit'}
+            onPress={() => console.log('Submitted ' + this.props.task.newTask)} />
         </View>
 
       </View>

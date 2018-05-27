@@ -7,6 +7,5 @@ import { postListSchema, replyListSchema } from '../../store/schema';
 import { assessment_cha } from '../../testData/testData';
 
 export const fetchAssessment = () => {
-  console.log(assessment_cha)
   return new Promise(resolve => setTimeout(() => resolve(assessment_cha), 100));
 }

@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-class NewPostButton extends Component {
+class NewTaskButton extends Component {
 
     render() {
 
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
     icon: { fontSize: 25 },
 })
 
-export default NewPostButton;
+export default NewTaskButton;

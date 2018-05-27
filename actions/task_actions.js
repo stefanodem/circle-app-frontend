@@ -11,13 +11,13 @@ import {
   fetchUserTasks,
 } from '../services/api/tasks';
 
-function fetchingTasks() {
+const fetchingTasks = () => {
   return {
     type: FETCHING_TASKS,
   }
 }
 
-function fetchingTasksSuccess (tasks, timestamp) {
+const fetchingTasksSuccess = (tasks, timestamp) => {
   return {
     type: FETCHING_TASKS_SUCCESS,
     tasks,
@@ -25,7 +25,7 @@ function fetchingTasksSuccess (tasks, timestamp) {
   }
 }
 
-function fetchingTasksFailure (error) {
+const fetchingTasksFailure = (error) => {
   console.warn(error);
   return {
     type: FETCHING_TASKS_FAILURE,
@@ -33,19 +33,17 @@ function fetchingTasksFailure (error) {
   }
 }
 
-export function removeFetchingUser() {
+export const removeFetchingUser = () => {
   return {
     type: REMOVE_FETCHING_TASKS,
   }
 }
 
-export function fetchAndHandleTasks(uid) {
-  return function (dispatch) {
-    dispatch(fetchingTasks())
-    return fetchUserTasks(uid)
-      .then((tasks) => dispatch(fetchingTasksSuccess(tasks, Date.now())))
-      .catch((error) => dispatch(fetchingTasksFailure(error)))
-  }
+export const fetchAndHandleTasks = (uid) => (dispatch) => {
+  dispatch(fetchingTasks())
+  return fetchUserTasks(uid)
+    .then((tasks) => dispatch(fetchingTasksSuccess(tasks, Date.now())))
+    .catch((error) => dispatch(fetchingTasksFailure(error)))
 }
 
 export const updateNewTaskText = (fieldName, text) => {
@@ -56,7 +54,7 @@ export const updateNewTaskText = (fieldName, text) => {
   }
 }
 
-export function removeNewTaskText() {
+export const removeNewTaskText = () => {
   return {
     type: REMOVE_NEWTASK_TEXT,
   }
