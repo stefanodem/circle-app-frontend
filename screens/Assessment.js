@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Dimensions,
 } from 'react-native';
+import { ButtonBack } from '../components';
 import { CheckBox, Slider, FormLabel, FormInput, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Progress from 'react-native-progress';
@@ -68,7 +69,6 @@ const PersonalInformation = ({ question, gender, onResponseChange, onResponseSub
           fontSize={18}
           backgroundColor={'blue'}
           title={'Next'}
-          //TODO: handle response.id
           onPress={() => onResponseSubmit(question.id)} />
       </View>
 
@@ -185,28 +185,38 @@ const MultipleChoice = ({ question, multipleChoice, style, onResponseCheck, onRe
           fontSize={18}
           backgroundColor={'blue'}
           title={'Next'}
-          //TODO: handle response.id
-          onPress={() => onResponseSubmit(question.id, 1)} />}
+          onPress={() => onResponseSubmit(question.id)} />}
 
     </View>
   )
 }
 
 //TODO:
-//goBack - add getLastQuestion action (and add lastQuestion state --> array with whole history)
-//handle multiple responses
+//find a way of how to pass history array into navigationsoptions
+//Datepicker https://github.com/xgfe/react-native-datepicker
+//styles
+//create new, clean up and move components
+//error handling
 
 class AssessmentScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
+    const { previousQuestion } = navigation.state.params || {};
     return {
       title: 'Assessment',
       headerTitle: 'Assessment',
+      headerLeft: (
+          <ButtonBack
+          onPress={ () => previousQuestion() } />
+      ),
     };
   }
 
   componentDidMount() {
     this.props.fetchAndHandleAssessment('cha');
+    this.props.navigation.setParams({
+      previousQuestion: this.props.returnPreviousQuestion,
+    })
   }
 
   _getResponseComponent(responseType, question, onResponseChange, onResponseCheck, onResponseSubmit) {
@@ -214,7 +224,6 @@ class AssessmentScreen extends Component {
       case 'boolean':
         return (
           <BinaryChoice
-            //responses={responses}
             question={question}
             onResponseSubmit={onResponseSubmit} />
         );
@@ -223,8 +232,6 @@ class AssessmentScreen extends Component {
           <MultipleChoice
             style={styles.multipleChoice}
             question={question}
-            //multipleChoice
-            //onResponseCheck={onResponseCheck}
             onResponseSubmit={onResponseSubmit} />
         );
       case 'interval-scale':

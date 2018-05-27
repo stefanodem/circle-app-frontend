@@ -8,6 +8,7 @@ import {
   PROCESSING_RESPONSE_ERROR,
   CHECK_RESPONSE,
   UPDATE_PERSONAL_INFO,
+  RETURN_PREVIOUS_QUESTION,
 } from './types';
 
 import {
@@ -22,13 +23,17 @@ const fetchingAssessment = () => {
 }
 
 const fetchingAssessmentSuccess = (assessment) => {
-  const assessmentLength = _values(assessment).length;
+  const assessmentList = _values(assessment)
+  const assessmentLength = assessmentList.length;
   const progress = 1 / assessmentLength
+  const firstQuestionId = assessmentList[0].id
+
   return {
     type: FETCHING_ASSESSMENT_SUCCESS,
     assessment,
     assessmentLength,
     progress,
+    firstQuestionId,
   }
 }
 
@@ -103,6 +108,12 @@ export const checkResponse = (questionId, responseId) => {
       type: PROCESSING_RESPONSE_ERROR,
       error: 'Something went wrong',
     }
+  }
+}
+
+export const returnPreviousQuestion = () => {
+  return {
+    type: RETURN_PREVIOUS_QUESTION,
   }
 }
 

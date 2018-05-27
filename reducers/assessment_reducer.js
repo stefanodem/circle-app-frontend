@@ -8,6 +8,7 @@ import {
   PROCESSING_RESPONSE_ERROR,
   CHECK_RESPONSE,
   UPDATE_PERSONAL_INFO,
+  RETURN_PREVIOUS_QUESTION,
 } from '../actions/types';
 
 const initialState = {
@@ -42,8 +43,9 @@ export default function(state = initialState, action) {
         isFetching: false,
         assessment: action.assessment,
         assessmentLength: action.assessmentLength,
-        currentQuestion: 1,
-        progress: 1 / action.assessmentLength,
+        history: [action.firstQuestionId],
+        currentQuestion: action.firstQuestionId,
+        progress: [action.firstQuestionId] / action.assessmentLength,
       };
     case FETCHING_ASSESSMENT_FAILURE:
       return {
@@ -72,6 +74,7 @@ export default function(state = initialState, action) {
     case SUBMIT_RESPONSE:
       return {
         ...state,
+        //toggle response.check flags
         assessment: {
           ...state.assessment,
           [action.questionId]: {
@@ -84,13 +87,14 @@ export default function(state = initialState, action) {
             }),
           },
         },
-        history: [action.questionId, ...state.history],
+        history: [action.nextQuestion, ...state.history],
         currentQuestion: action.nextQuestion,
-        progress: action.nextQuestion / state.assessmentLength,
+        progress: ([action.questionId, ...state.history].length) / state.assessmentLength,
       };
     case CHECK_RESPONSE:
       return {
         ...state,
+        //toggle response.check flags
         assessment: {
           ...state.assessment,
           [action.questionId]: {
@@ -103,6 +107,24 @@ export default function(state = initialState, action) {
             }),
           },
         },
+      };
+    case RETURN_PREVIOUS_QUESTION:
+      state.history.shift();
+      return {
+        ...state,
+        //Reset all response.check flags to false:
+        assessment: {
+          ...state.assessment,
+          [state.history[0]]: {
+            ...state.assessment[state.history[0]],
+            responses: state.assessment[state.history[0]].responses.map((response) => {
+              response.checked = false;
+              return response;
+            }),
+          },
+        },
+        currentQuestion: state.history[0],
+        progress: (state.history.length) / state.assessmentLength,
       };
     case PROCESSING_RESPONSE_ERROR:
       return {
