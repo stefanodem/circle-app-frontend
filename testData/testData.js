@@ -47,7 +47,7 @@ export const assessment_cha2 = {
     responses: [
       {id: 1, title: 'Independent', description: 'Decisions consistent, reasonable and safe'},
       {id: 2, title: 'Modified independence', description: 'Some difficulty in new situations only'},
-      {id: 3, title: 'Minimally impaired', description: 'In specific recurring situations, deicsions become poor or unsafe; cues / supervision necessary at those times'},
+      {id: 3, title: 'Minimally impaired', description: 'In specific recurring situations, decisions become poor or unsafe; cues / supervision necessary at those times'},
       {id: 4, title: 'Severly impaired', description: 'Never or rarely makes decisions'},
       {id: 5, title: 'No discernable consciousness', description: ''},
     ],
@@ -119,7 +119,7 @@ export const assessment_cha = {
     responses: [
       {id: 1, title: 'Independent', description: 'Decisions consistent, reasonable and safe', checked: false},
       {id: 2, title: 'Modified independence', description: 'Some difficulty in new situations only', checked: false},
-      {id: 3, title: 'Minimally impaired', description: 'In specific recurring situations, deicsions become poor or unsafe; cues / supervision necessary at those times', checked: false},
+      {id: 3, title: 'Minimally impaired', description: 'In specific recurring situations, decisions become poor or unsafe; cues / supervision necessary at those times', checked: false},
       {id: 4, title: 'Severly impaired', description: 'Never or rarely makes decisions', checked: false},
       {id: 5, title: 'No discernable consciousness', description: '', checked: false},
     ],

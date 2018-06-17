@@ -181,8 +181,7 @@ const MultipleChoice = ({ question, multipleChoice, style, onResponseCheck, onRe
             checkedIcon='dot-circle-o'
             checkedColor='blue'
             uncheckedIcon='circle-o'
-            checked={response.checked}
-             />
+            checked={response.checked} />
         ))}
 
       </ScrollView>
@@ -198,6 +197,8 @@ const MultipleChoice = ({ question, multipleChoice, style, onResponseCheck, onRe
 //create new, clean up and move components
 //error handling
 //Add scroll indicator text (if scroll down, then add scroll indicator text)
+//Add a skip button as a default (Next Button when multiple choice and a response is selected)
+//Add question index indicating if question has been answered
 
 class AssessmentScreen extends Component {
   static navigationOptions = ({ navigation }) => {

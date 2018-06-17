@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
 
-import { CardMetrics, NewTaskButton } from '../components';
+import { Task, NewTaskButton } from '../components';
 
 class TaskFeedScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -33,46 +33,10 @@ class TaskFeedScreen extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <TouchableWithoutFeedback
-        onPress={ () => navigate('TaskDetails', item.id) } >
-
-        <Card>
-
-          <Text style={{ marginBottom: 30 }}>
-            {item.taskTitle}
-          </Text>
-
-          <CardMetrics />
-
-          <View style={styles.buttonContainer}>
-            <Button
-              //raised
-              fontSize={14}
-              icon={{ name: 'check' }}
-              backgroundColor='grey'
-              //fontFamily='Lato'
-              buttonStyle={{ height: 35, width: 110 }}
-              title='Complete' />
-            <Button
-              //raised
-              fontSize={14}
-              icon={{ name: 'delete' }}
-              backgroundColor='grey'
-              //fontFamily='Lato'
-              buttonStyle={{ height: 35, width: 110 }}
-              title='Dismiss' />
-            <Button
-              //raised
-              icon={{ name: 'message' }}
-              fontSize={14}
-              backgroundColor='grey'
-              //fontFamily='Lato'
-              buttonStyle={{ height: 35, width: 110 }}
-              title='Message' />
-          </View>
-
-        </Card>
-      </TouchableWithoutFeedback>
+      <Task
+        navigate={navigate}
+        taskId={item.id}
+        taskTitle={item.taskTitle} />
     )
   }
 

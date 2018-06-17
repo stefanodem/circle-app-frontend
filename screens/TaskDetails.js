@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView, Text, Image, AsyncStorage, FlatList, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  Image,
+  AsyncStorage,
+  FlatList,
+  TouchableWithoutFeedback,
+  ActivityIndicator
+} from 'react-native';
 import { Card, ListItem, Button, Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ReadMore from 'react-native-read-more-text';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
+import { Comment } from '../components';
 
 const TaskDetail = ({ title, text, icon, iconColor }) => {
   return (
@@ -97,39 +108,58 @@ class TaskDetailsScreen extends Component {
     }
 
     return (
-      <View
-        style={styles.container} >
+      <ScrollView>
 
-        <TaskDetail
-          title={'Task'}
-          text={ taskDetails.taskDescription }
-          icon={'assignment'}
-          iconColor={'brown'} />
+        <View
+          style={styles.taskContainer} >
 
-        <TaskDetail
-          title={'Diagnosis / Problem'}
-          text={ taskDetails.diagnosis }
-          icon={'local-hospital'}
-          iconColor={'red'} />
+          <TaskDetail
+            title={'Task'}
+            text={ taskDetails.taskDescription }
+            icon={'assignment'}
+            iconColor={'brown'} />
 
-        <TaskDetail
-          title={'Goal'}
-          text={ taskDetails.goal }
-          icon={'event-available'}
-          iconColor={'green'} />
+          <TaskDetail
+            title={'Diagnosis / Problem'}
+            text={ taskDetails.diagnosis }
+            icon={'local-hospital'}
+            iconColor={'red'} />
 
-        <TaskDetail
-          title={'Time / Interval'}
-          text={ taskDetails.time }
-          icon={'schedule'}
-          iconColor={'black'} />
+          <TaskDetail
+            title={'Goal'}
+            text={ taskDetails.goal }
+            icon={'event-available'}
+            iconColor={'green'} />
 
-        <TaskAssignees
-          title={'Circlers'}
-          icon={'people'}
-          iconColor={'blue'} />
+          <TaskDetail
+            title={'Time / Interval'}
+            text={ taskDetails.time }
+            icon={'schedule'}
+            iconColor={'black'} />
 
-      </View>
+          <TaskAssignees
+            title={'Circlers'}
+            icon={'people'}
+            iconColor={'blue'} />
+
+        </View>
+
+        <View>
+
+          <View
+            style={styles.commentBar}>
+            <Text
+              style={{ fontSize: 18, color: 'grey' }}>{'Comments'}</Text>
+          </View>
+
+          <Comment />
+          <Comment />
+
+        </View>
+
+      {/* TODO: post input */}
+
+      </ScrollView>
     );
   }
 }
@@ -141,15 +171,16 @@ function mapStateToProps({ task }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  taskContainer: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingBottom: 10,
   },
   section: {
     flexDirection: 'row',
     paddingLeft: 10,
     paddingRight: 50,
-    paddingTop: 20
+    paddingTop: 20,
   },
   sectionTitle: {
     fontSize: 18,
@@ -167,6 +198,19 @@ const styles = StyleSheet.create({
   avatars: {
     flexDirection: 'row',
   },
+  commentBar: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopColor: 'black',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: 'black',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    padding: 20,
+    height: 20,
+    backgroundColor: '#fff',
+  }
 });
 
 export default connect(mapStateToProps, actions)(TaskDetailsScreen);
