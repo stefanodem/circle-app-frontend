@@ -79,7 +79,7 @@ export const updateResponse = (value, type, fieldName) => {
 }
 
 export const submitResponse = (questionId, responseId) => {
-  if (questionId && responseId) {
+  if (questionId) {
     return {
       type: SUBMIT_RESPONSE,
       questionId,
@@ -132,13 +132,7 @@ const getNextQuestion = (questionId, responseId) => {
       } else {
         return questionId + 1;
       }
-    case 2:
-      return questionId + 1;
-    case 3:
-      return questionId + 1;
-    case 4:
-      return questionId + 1;
-    case 5:
+    default:
       return questionId + 1;
   }
 }

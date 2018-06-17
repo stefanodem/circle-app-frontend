@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
+  ScrollView,
   Text,
   Image,
   TouchableOpacity,
@@ -76,7 +77,7 @@ const PersonalInformation = ({ question, gender, onResponseChange, onResponseSub
   )
 }
 
-const IntervalScale = ({ currentValue, max, min, onSlide, metricAbbrev, onResponseSubmit }) => {
+const IntervalScale = ({ question, currentValue, max, min, onSlide, metricAbbrev, onResponseSubmit }) => {
 
   if (!currentValue) {
     currentValue = Math.floor((max + min) / 2)
@@ -113,7 +114,8 @@ const IntervalScale = ({ currentValue, max, min, onSlide, metricAbbrev, onRespon
           fontSize={18}
           backgroundColor={'blue'}
           title={'Next'}
-          onPress={() => console.log('Submitted ')} />
+          //TODO: handle weight and height response submits --> update data structure
+          onPress={() => onResponseSubmit(question.id)} />
 
     </View>
   )
@@ -133,7 +135,7 @@ const BinaryChoice = ({ question, onResponseSubmit }) => {
       style={{ flex: 1, flexDirection: 'row' }} >
 
       <TouchableOpacity
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 300, backgroundColor: 'green' }}
         onPress={() => onResponseSubmit(question.id, firstResponse.id)} >
         <Text
           style={{ fontSize: 24, }} >
@@ -142,7 +144,7 @@ const BinaryChoice = ({ question, onResponseSubmit }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 300, backgroundColor: 'red' }}
         onPress={() => onResponseSubmit(question.id, secondResponse.id)} >
         <Text
           style={{ fontSize: 24 }} >
@@ -160,32 +162,30 @@ const MultipleChoice = ({ question, multipleChoice, style, onResponseCheck, onRe
     <View
       style={{ flex: 1, justifyContent: 'center' }} >
 
-      {question.responses.length === 0
-        ? <Text style={styles.error}> 'Something went wrong' </Text>
-        : null}
+      <View>
+        {question.responses.length === 0
+          ? <Text style={styles.error}> 'Something went wrong' </Text>
+          : null}
+      </View>
 
-      {question.responses.map((response, index) => (
-        <CheckBox
-          key={index}
-          onPress={multipleChoice
-                  ? () => onResponseCheck(question.id, response.id)
-                  : () => onResponseSubmit(question.id, response.id)}
-          containerStyle={style.container}
-          textStyle={style.text}
-          title={response.title}
-          checkedIcon='dot-circle-o'
-          checkedColor='blue'
-          uncheckedIcon='circle-o'
-          checked={response.checked} />
-      ))}
+      <ScrollView>
+        {question.responses.map((response, index) => (
+          <CheckBox
+            key={index}
+            onPress={multipleChoice
+                    ? () => onResponseCheck(question.id, response.id)
+                    : () => onResponseSubmit(question.id, response.id)}
+            containerStyle={style.container}
+            textStyle={style.text}
+            title={response.title}
+            checkedIcon='dot-circle-o'
+            checkedColor='blue'
+            uncheckedIcon='circle-o'
+            checked={response.checked}
+             />
+        ))}
 
-      {multipleChoice &&
-        <Button
-          raised
-          fontSize={18}
-          backgroundColor={'blue'}
-          title={'Next'}
-          onPress={() => onResponseSubmit(question.id)} />}
+      </ScrollView>
 
     </View>
   )
@@ -197,6 +197,7 @@ const MultipleChoice = ({ question, multipleChoice, style, onResponseCheck, onRe
 //styles
 //create new, clean up and move components
 //error handling
+//Add scroll indicator text (if scroll down, then add scroll indicator text)
 
 class AssessmentScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -204,10 +205,10 @@ class AssessmentScreen extends Component {
     const { previousQuestion } = navigation.state.params || {};
     return {
       title: 'Assessment',
-      headerTitle: 'Assessment',
+      headerTitle: navigation.state.params && navigation.state.params.sectionTitle ? navigation.state.params.sectionTitle : '',
       headerLeft: (
           <ButtonBack
-          onPress={ () => previousQuestion() } />
+            onPress={ () => previousQuestion() } />
       ),
     };
   }
@@ -217,6 +218,14 @@ class AssessmentScreen extends Component {
     this.props.navigation.setParams({
       previousQuestion: this.props.returnPreviousQuestion,
     })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.assessment.currentQuestion !== nextProps.assessment.currentQuestion && nextProps.assessment.currentQuestion) {
+      this.props.navigation.setParams({
+        sectionTitle: nextProps.assessment.assessment[nextProps.assessment.currentQuestion].sectionName,
+      })
+    }
   }
 
   _getResponseComponent(responseType, question, onResponseChange, onResponseCheck, onResponseSubmit) {
@@ -237,6 +246,7 @@ class AssessmentScreen extends Component {
       case 'interval-scale':
         return (
           <IntervalScale
+            question={question}
             currentValue={this.props.assessment.currentResponse}
             onSlide={this.props.updateResponse}
             min={1}
@@ -261,6 +271,40 @@ class AssessmentScreen extends Component {
             onResponseChange={onResponseChange}
             onResponseSubmit={onResponseSubmit} />
         )
+      case 'weight':
+        return (
+          <IntervalScale
+            question={question}
+            currentValue={this.props.assessment.currentResponse}
+            onSlide={this.props.updateResponse}
+            min={1}
+            max={150}
+            metricAbbrev={'kg'}
+            onResponseSubmit={onResponseSubmit} />
+        );
+      case 'height':
+        return (
+          <IntervalScale
+            question={question}
+            currentValue={this.props.assessment.currentResponse}
+            onSlide={this.props.updateResponse}
+            min={1}
+            max={250}
+            metricAbbrev={'cm'}
+            onResponseSubmit={onResponseSubmit} />
+        );
+      case 'date':
+        return (
+          <Button
+            onPress={() => onResponseSubmit(question.id)}
+          />
+        )
+      case 'open':
+        return (
+          <Button
+            onPress={() => onResponseSubmit(question.id)}
+          />
+        )
     }
   }
 
@@ -284,35 +328,52 @@ class AssessmentScreen extends Component {
       <View
         style={styles.template.container} >
 
+        <Progress.Bar
+          animated={false}
+          progress={progress}
+          width={deviceWidth}
+          borderRadius={0}
+          height={12} />
+
         <View
           style={styles.template.titleContainer} >
-
-          <Progress.Bar
-            animated={false}
-            progress={progress}
-            width={deviceWidth}
-            borderRadius={0}
-            height={12} />
 
           <Text
             style={styles.template.title} >
             {question.title}
           </Text>
 
-          {question.description
+          {question.subTitle
             ? <Text
                 style={styles.template.description} >
-                {question.description}
+                {question.subTitle}
               </Text>
             : null}
 
         </View>
 
-        {this._getResponseComponent(responseType,
-                                    question,
-                                    this.props.updateResponse,
-                                    this.props.checkResponse,
-                                    this.props.submitResponse)}
+
+        <View
+          style={styles.template.responseContainer} >
+
+          {this._getResponseComponent(responseType,
+                                      question,
+                                      this.props.updateResponse,
+                                      this.props.checkResponse,
+                                      this.props.submitResponse)}
+
+        </View>
+
+       {question.responseType === 'multi-option' &&
+          <Button
+            containerViewStyle={styles.template.buttonContainer}
+            buttonStyle={styles.template.button}
+            fontSize={18}
+            backgroundColor={'blue'}
+            title={'Next'}
+            //TODO: handle weight and height response submits --> update data structure
+            onPress={() => this.props.submitResponse(question.id)} />
+       }
 
       </View>
     );
@@ -332,19 +393,29 @@ const styles = {
       backgroundColor: '#fff',
     },
     titleContainer: {
-      paddingBottom: 20,
+      flex: 1,
+      padding: 10,
     },
     title: {
       fontSize: 20,
       textAlign: 'center',
-      padding: 10,
-      paddingTop: 20,
+      paddingBottom: 5,
     },
     description: {
       fontSize: 18,
       textAlign: 'center',
       color: 'grey',
-      padding: 10,
+      paddingBottom: 5,
+    },
+    responseContainer: {
+      flex: 4,
+    },
+    buttonContainer: {
+      width: deviceWidth,
+      marginLeft: 0,
+    },
+    button: {
+      height: 50,
     },
     error: {
       fontSize: 18,

@@ -72,25 +72,34 @@ export default function(state = initialState, action) {
         }
       };
     case SUBMIT_RESPONSE:
-      return {
-        ...state,
-        //toggle response.check flags
-        assessment: {
-          ...state.assessment,
-          [action.questionId]: {
-            ...state.assessment[action.questionId],
-            responses: state.assessment[action.questionId].responses.map((response) => {
-              if (response.id === action.responseId) {
-                response.checked = !response.checked;
-              }
-              return response;
-            }),
+      if (action.responseId) {
+        return {
+          ...state,
+          //toggle response.check flags
+          assessment: {
+            ...state.assessment,
+            [action.questionId]: {
+              ...state.assessment[action.questionId],
+              responses: state.assessment[action.questionId].responses.map((response) => {
+                if (response.id === action.responseId) {
+                  response.checked = !response.checked;
+                }
+                return response;
+              }),
+            },
           },
-        },
-        history: [action.nextQuestion, ...state.history],
-        currentQuestion: action.nextQuestion,
-        progress: ([action.questionId, ...state.history].length) / state.assessmentLength,
-      };
+          history: [action.nextQuestion, ...state.history],
+          currentQuestion: action.nextQuestion,
+          progress: ([action.questionId, ...state.history].length) / state.assessmentLength,
+        };
+      } else {
+        return {
+          ...state,
+          history: [action.nextQuestion, ...state.history],
+          currentQuestion: action.nextQuestion,
+          progress: ([action.questionId, ...state.history].length) / state.assessmentLength,
+        };
+      }
     case CHECK_RESPONSE:
       return {
         ...state,
