@@ -9,28 +9,27 @@ import {
 import { Avatar } from 'react-native-elements';
 
 const Comment = props => {
-  // const {
-  //   avatar,
-  //   name,
-  //   date,
-  //   post,
-  // } = props;
+  const {
+    avatar,
+    name,
+    date,
+    comment,
+  } = props;
 
-  const avatar = 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'
-  const name = 'Steve'
-  const date = '2018/02/23'
-  const post = 'Hi there what are you doing right now Im writing this text to you'
+  // const avatar = 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'
+  // const name = 'Steve'
+  // const date = '2018/02/23'
+  // const comment = 'Hi there what are you doing right now Im writing this text to you'
 
   return (
     <View
       style={styles.container} >
 
-
-        <Avatar
-          small
-          rounded
-          //onPress{onProfilePress}
-          source={{uri: avatar}} />
+      <Avatar
+        small
+        rounded
+        //onPress{onProfilePress}
+        source={{uri: avatar}} />
 
       <View
         style={{ paddingLeft: 10 }} >
@@ -46,11 +45,10 @@ const Comment = props => {
           </View>
 
           <View
-            style={styles.postContainer} >
+            style={styles.commentContainer} >
 
             <Text
-              style={styles.post} >{post}</Text>
-
+              style={styles.comment} >{comment}</Text>
 
           </View>
         </View>
@@ -69,16 +67,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingBottom: 5,
   },
-  postContainer: {
+  commentContainer: {
 
   },
   name: {
     fontWeight: 'bold',
   },
   date: {
+    paddingLeft: 10,
     color: 'grey',
   },
-  post: {
+  comment: {
     paddingRight: 10,
     color: 'black',
   }

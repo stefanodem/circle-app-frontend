@@ -7,6 +7,17 @@ export const tasks = {
       taskDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum",
       time: 'Every day',
       circlers: [],
+      comments: {
+        1: {
+          id: 1,
+          uid: '123',
+          name: "Steve",
+          avatar: "http://www.avatarsdb.com/avatars/spongebob_happy.jpg",
+          createdAt: 1511854675244,
+          body: "Hey there whats up hows it going",
+          lastUpdated: null,
+        },
+      },
     },
     2: {
       id: 2,
@@ -16,6 +27,17 @@ export const tasks = {
       taskDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum",
       time: 'Every day',
       circlers: [],
+      comments: {
+        2: {
+          id: 2,
+          uid: '123',
+          name: "Steve",
+          avatar: "http://www.avatarsdb.com/avatars/spongebob_happy.jpg",
+          createdAt: 1511854675244,
+          body: "Hey there whats up hows it going",
+          lastUpdated: null,
+        },
+      },
     },
     3: {
       id: 3,
@@ -25,6 +47,26 @@ export const tasks = {
       taskDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum",
       time: 'Every day',
       circlers: [],
+      comments: {
+        3: {
+          id: 3,
+          uid: '123',
+          name: "Steve",
+          avatar: "http://www.avatarsdb.com/avatars/spongebob_happy.jpg",
+          createdAt: 1511854675244,
+          body: "Hey there whats up hows it going",
+          lastUpdated: null,
+        },
+        4: {
+          id: 4,
+          uid: '123',
+          name: "Steve",
+          avatar: "http://www.avatarsdb.com/avatars/spongebob_happy.jpg",
+          createdAt: 1511854675244,
+          body: "Hey there whats up hows it going",
+          lastUpdated: null,
+        },
+      },
     },
     4: {
       id: 4,
@@ -34,6 +76,8 @@ export const tasks = {
       taskDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum",
       time: 'Every day',
       circlers: [],
+      comments: {
+      },
     },
 }
 

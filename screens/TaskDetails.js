@@ -33,7 +33,7 @@ const TaskDetail = ({ title, text, icon, iconColor }) => {
           { title }
         </Text>
           <ReadMore
-            numberOfLines={3}>
+            numberOfLines={2}>
             <Text >
               { text }
             </Text>
@@ -98,6 +98,8 @@ class TaskDetailsScreen extends Component {
     const isFetching = this.props.task.isFetching;
     const taskId = this.props.navigation.state.params;
     const taskDetails = this.props.task.tasks[taskId];
+    const comments = _values(taskDetails.comments);
+    console.log(comments)
 
     if (isFetching) {
       return (
@@ -152,9 +154,17 @@ class TaskDetailsScreen extends Component {
               style={{ fontSize: 18, color: 'grey' }}>{'Comments'}</Text>
           </View>
 
-          <Comment />
-          <Comment />
-
+          {comments &&
+            comments.map(comment => {
+              return (
+                <Comment
+                  key={comment.id}
+                  avatar={comment.avatar}
+                  name={comment.name}
+                  date={comment.lastUpdated && comment.createdat}
+                  comment={comment.body} />
+              )
+            })}
         </View>
 
       {/* TODO: post input */}
@@ -180,7 +190,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 10,
     paddingRight: 50,
-    paddingTop: 20,
+    paddingTop: 10,
   },
   sectionTitle: {
     fontSize: 18,
@@ -193,7 +203,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   icon: {
-    fontSize: 22
+    fontSize: 22,
   },
   avatars: {
     flexDirection: 'row',
