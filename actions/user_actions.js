@@ -13,7 +13,7 @@ import {
 
 import {
   fetchPatients,
-} from '../services/api/patient';
+} from '../services/api/user';
 
 // export function authUser (uid) {
 //   return {
@@ -28,44 +28,44 @@ import {
 //   }
 // }
 
-function fetchingUser() {
-  return {
-    type: FETCHING_USER,
-  }
-}
+// function fetchingUser() {
+//   return {
+//     type: FETCHING_USER,
+//   }
+// }
 
-function fetchingUserSuccess (uid, user, timestamp) {
-  return {
-    type: FETCHING_USER_SUCCESS,
-    uid,
-    user,
-    timestamp,
-  }
-}
+// function fetchingUserSuccess (uid, user, timestamp) {
+//   return {
+//     type: FETCHING_USER_SUCCESS,
+//     uid,
+//     user,
+//     timestamp,
+//   }
+// }
 
-function fetchingUserFailure (error) {
-  console.warn(error);
-  return {
-    type: FETCHING_USER_FAILURE,
-    error: 'Error fetching user',
-  }
-}
+// function fetchingUserFailure (error) {
+//   console.warn(error);
+//   return {
+//     type: FETCHING_USER_FAILURE,
+//     error: 'Error fetching user',
+//   }
+// }
 
-export function removeFetchingUser () {
-  return {
-    type: REMOVE_FETCHING_USER,
-  }
-}
+// export function removeFetchingUser () {
+//   return {
+//     type: REMOVE_FETCHING_USER,
+//   }
+// }
 
-export function fetchAndHandleUser (uid) {
-  return function (dispatch) {
-    dispatch(fetchingUser())
+// export function fetchAndHandleUser (uid) {
+//   return function (dispatch) {
+//     dispatch(fetchingUser())
 
-    return fetchUser(uid)
-      .then((user) => dispatch(fetchingUserSuccess(uid, user, Date.now())))
-      .catch((error) => dispatch(fetchingUserFailure(error)))
-  }
-}
+//     return fetchUser(uid)
+//       .then((user) => dispatch(fetchingUserSuccess(uid, user, Date.now())))
+//       .catch((error) => dispatch(fetchingUserFailure(error)))
+//   }
+// }
 
 function fetchingUserPatients() {
   return {
@@ -98,11 +98,11 @@ export function removeFetchingUserPatients() {
 
 export function fetchAndHandleUserPatients(uid) {
   return function (dispatch) {
-    dispatch(fetchingPatients())
+    dispatch(fetchingUserPatients())
 
     return fetchPatients(uid)
-      .then((patients) => dispatch(fetchingPatientsSuccess(uid, patients, Date.now())))
-      .catch((error) => dispatch(fetchingUserFailure(uid, error)))
+      .then((patients) => dispatch(fetchingUserPatientsSuccess(uid, patients, Date.now())))
+      .catch((error) => dispatch(fetchingUserPatientsFailure(uid, error)))
   }
 }
 

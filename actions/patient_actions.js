@@ -1,21 +1,13 @@
 import {
-  FETCHING_PATIENT,
-  FETCHING_PATIENT_SUCCESS,
-  FETCHING_PATIENT_FAILURE,
-  REMOVE_FETCHING_PATIENT,
 } from './types';
 
-import {
-  fetchPatients,
-} from '../services/api/user';
-
-function fetchingPatients() {
+const fetchingPatient = () => {
   return {
     type: FETCHING_PATIENT,
   }
 }
 
-function fetchingPatientsSuccess(uid, patients, timestamp) {
+const fetchingPatientSuccess = (uid, patients, timestamp) => {
   return {
     type: FETCHING_PATIENT_SUCCESS,
     uid,
@@ -24,7 +16,7 @@ function fetchingPatientsSuccess(uid, patients, timestamp) {
   }
 }
 
-function fetchingPatientsFailure(uid, error) {
+const fetchingPatientFailure = (uid, error) => {
   console.warn(error);
   return {
     type: FETCHING_PATIENT_FAILURE,
@@ -32,18 +24,18 @@ function fetchingPatientsFailure(uid, error) {
   }
 }
 
-export function removeFetchingPatients() {
+export const removeFetchingPatient = () => {
   return {
     type: REMOVE_FETCHING_PATIENT,
   }
 }
 
-export function fetchAndHandlePatients(uid) {
+export const fetchAndHandlePatient = (uid) => {
   return function (dispatch) {
-    dispatch(fetchingPatients())
+    dispatch(fetchingUserPatients())
 
     return fetchPatients(uid)
-      .then((patients) => dispatch(fetchingPatientsSuccess(uid, patients, Date.now())))
-      .catch((error) => dispatch(fetchingUserFailure(uid, error)))
+      .then((patients) => dispatch(fetchingUserPatientsSuccess(uid, patients, Date.now())))
+      .catch((error) => dispatch(fetchingUserPatientsFailure(uid, error)))
   }
 }
