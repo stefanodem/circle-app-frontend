@@ -1,5 +1,5 @@
 import { StackNavigator } from 'react-navigation';
-import { TaskFeed, NewTask, TaskDetails } from '../../screens';
+import { Home, TaskFeed, NewTask, TaskDetails } from '../../screens';
 
 const options = {
 
@@ -7,7 +7,8 @@ const options = {
 
 export default StackNavigator({
 
-    Home: { screen: TaskFeed },
+    Home: { screen: Home },
+    TaskFeed: { screen: TaskFeed },
     NewTask: { screen: NewTask },
     TaskDetails: { screen: TaskDetails }
 
