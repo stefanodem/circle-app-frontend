@@ -14,6 +14,7 @@ import {
 const initialState = {
   isFetching: true,
   error: '',
+  type: '',
   assessment: '',
   assessmentLength: '',
   history: [],

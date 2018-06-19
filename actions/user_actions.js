@@ -1,6 +1,3 @@
-//import { saveUser } from 'services/api';
-//import { fetchUser } from 'helpers/api'
-
 import {
   //AUTH_USER,
   //UNAUTH_USER,
@@ -8,7 +5,15 @@ import {
   FETCHING_USER_SUCCESS,
   FETCHING_USER_FAILURE,
   REMOVE_FETCHING_USER,
+  FETCHING_PATIENT,
+  FETCHING_PATIENT_SUCCESS,
+  FETCHING_PATIENT_FAILURE,
+  REMOVE_FETCHING_PATIENT,
 } from './types';
+
+import {
+  fetchPatients,
+} from '../services/api/patient';
 
 // export function authUser (uid) {
 //   return {
@@ -61,3 +66,43 @@ export function fetchAndHandleUser (uid) {
       .catch((error) => dispatch(fetchingUserFailure(error)))
   }
 }
+
+function fetchingUserPatients() {
+  return {
+    type: FETCHING_PATIENT,
+  }
+}
+
+function fetchingUserPatientsSuccess(uid, patients, timestamp) {
+  return {
+    type: FETCHING_PATIENT_SUCCESS,
+    uid,
+    patients,
+    timestamp,
+  }
+}
+
+function fetchingUserPatientsFailure(uid, error) {
+  console.warn(error);
+  return {
+    type: FETCHING_PATIENT_FAILURE,
+    error: `Error fetching user: ${action.uid}`,
+  }
+}
+
+export function removeFetchingUserPatients() {
+  return {
+    type: REMOVE_FETCHING_PATIENT,
+  }
+}
+
+export function fetchAndHandleUserPatients(uid) {
+  return function (dispatch) {
+    dispatch(fetchingPatients())
+
+    return fetchPatients(uid)
+      .then((patients) => dispatch(fetchingPatientsSuccess(uid, patients, Date.now())))
+      .catch((error) => dispatch(fetchingUserFailure(uid, error)))
+  }
+}
+

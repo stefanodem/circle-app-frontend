@@ -16,11 +16,6 @@ const Comment = props => {
     comment,
   } = props;
 
-  // const avatar = 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'
-  // const name = 'Steve'
-  // const date = '2018/02/23'
-  // const comment = 'Hi there what are you doing right now Im writing this text to you'
-
   return (
     <View
       style={styles.container} >

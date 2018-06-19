@@ -1,10 +1,4 @@
 import {
-  //AUTH_USER,
-  //UNAUTH_USER,
-  FETCHING_USER,
-  FETCHING_USER_SUCCESS,
-  FETCHING_USER_FAILURE,
-  REMOVE_FETCHING_USER,
   FETCHING_PATIENT,
   FETCHING_PATIENT_SUCCESS,
   FETCHING_PATIENT_FAILURE,
@@ -14,46 +8,11 @@ import {
 const initialState = {
   isFetching: true,
   error: '',
-  //isAuthed: false,
-  //authedId: '',
-  info: {
-    name: 'Sarah Miller',
-    uid: '1',
-    avatar: 'https://d30y9cdsu7xlg0.cloudfront.net/png/381743-200.png',
-  },
   patients: '',
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case FETCHING_USER:
-      return {
-        ...state,
-        isFetching: true,
-      };
-    case FETCHING_USER_SUCCESS:
-      return action.user === null
-      ? {
-        ...state,
-        isFetching: false,
-        error: `Error while fetching user id: ${action.uid}`
-      }
-      : {
-        ...state,
-        isFetching: false,
-        info: action.user,
-      }
-    case FETCHING_USER_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.error,
-      };
-    case REMOVE_FETCHING_USER:
-      return {
-        ...state,
-        isFetching: false,
-      };
     case FETCHING_PATIENT:
       return {
         ...state,

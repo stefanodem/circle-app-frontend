@@ -90,16 +90,11 @@ class TaskDetailsScreen extends Component {
     };
   }
 
-  componentDidMount () {
-    //this.props.fetchAndHandleTaskDetail('1');
-  }
-
   render() {
     const isFetching = this.props.task.isFetching;
-    const taskId = this.props.navigation.state.params;
+    const taskId = this.props.navigation.state.params ? this.props.navigation.state.params.taskId : null;
     const taskDetails = this.props.task.tasks[taskId];
     const comments = _values(taskDetails.comments);
-    console.log(comments)
 
     if (isFetching) {
       return (
@@ -165,6 +160,7 @@ class TaskDetailsScreen extends Component {
                   comment={comment.body} />
               )
             })}
+
         </View>
 
       {/* TODO: post input */}

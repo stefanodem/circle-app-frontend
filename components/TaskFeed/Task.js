@@ -18,7 +18,7 @@ const Task = props => {
 
   return (
     <TouchableWithoutFeedback
-      onPress={ () => navigate('TaskDetails', taskId) } >
+      onPress={ () => navigate('TaskDetails', {taskId}) } >
 
       <Card>
 

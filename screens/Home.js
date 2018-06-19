@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, AsyncStorage, FlatList, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
-import { Card, ListItem, Button } from 'react-native-elements';
+import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
 
 import { Task, NewTaskButton } from '../components';
 
-class TaskFeedScreen extends Component {
+class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
-      title: 'Task Feed',
-      headerTitle: 'Tasks',
+      title: 'Home',
+      headerTitle: 'Home',
       //TODO: connect navigation to redux and get care-receiver name
       //can be String, React Element or React Componen
       //header: can be React Element or a function --> for customizing headers
@@ -26,35 +26,37 @@ class TaskFeedScreen extends Component {
   }
 
   componentDidMount () {
-    const uid = this.props.navigation.state.params ? this.props.navigation.state.params.uid : null;
-    this.props.fetchAndHandleTasks(uid);
+    this.props.fetchAndHandleUserPatients('1');
   }
 
-  _renderTasks = ({ item }) => {
+  _renderPatient = ({ item }) => {
     const { navigate } = this.props.navigation;
 
     return (
-      <Task
-        navigate={navigate}
-        taskId={item.id}
-        taskTitle={item.taskTitle} />
+      <ListItem
+        key={item.id}
+        onPress={() => navigate('TaskFeed', {uid: item.id})}
+        containerStyle={styles.container}
+        roundAvatar
+        avatar={{uri: item.avatar}}
+        title={item.name}
+        subtitle={"Next visit: " + item.nextVisit} />
     )
   }
 
   _keyExtractor = (item, index) => item.id
 
-  _renderTaskFeed = (keyExtractor, cards, renderTasks) => {
+  _renderPatients = (keyExtractor, patient, renderPatients) => {
     return (
       <FlatList
         keyExtractor={keyExtractor}
-        data={cards}
-        renderItem={renderTasks} />
+        data={patient}
+        renderItem={renderPatients} />
     )
   }
 
   render() {
-    const isFetching = this.props.task.isFetching;
-    const tasks = this.props.task.tasks;
+    const {isFetching, error, patients} = this.props.user;
 
     if (isFetching) {
       return (
@@ -62,40 +64,37 @@ class TaskFeedScreen extends Component {
           <ActivityIndicator size="large" />
         </View>
       );
+    } else if (error) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text>{error}</Text>
+        </View>
+      )
     }
 
     return (
       <View>
 
-        {this._renderTaskFeed(
+        {this._renderPatients(
             this._keyExtractor,
-            _values(tasks),
-            this._renderTasks)}
+            _values(patients),
+            this._renderPatient)}
 
       </View>
     );
   }
 }
 
-function mapStateToProps({ task }) {
+function mapStateToProps({ user }) {
   return {
-    task,
+    user,
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 0,
-    paddingTop: 10,
   },
 });
 
-export default connect(mapStateToProps, actions)(TaskFeedScreen);
+export default connect(mapStateToProps, actions)(HomeScreen);
