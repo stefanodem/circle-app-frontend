@@ -5,10 +5,10 @@ import {
   FETCHING_USER_SUCCESS,
   FETCHING_USER_FAILURE,
   REMOVE_FETCHING_USER,
-  FETCHING_PATIENT,
-  FETCHING_PATIENT_SUCCESS,
-  FETCHING_PATIENT_FAILURE,
-  REMOVE_FETCHING_PATIENT,
+  FETCHING_USER_PATIENT,
+  FETCHING_USER_PATIENT_SUCCESS,
+  FETCHING_USER_PATIENT_FAILURE,
+  REMOVE_FETCHING_USER_PATIENT,
 } from './types';
 
 import {
@@ -69,13 +69,13 @@ import {
 
 function fetchingUserPatients() {
   return {
-    type: FETCHING_PATIENT,
+    type: FETCHING_USER_PATIENT,
   }
 }
 
 function fetchingUserPatientsSuccess(uid, patients, timestamp) {
   return {
-    type: FETCHING_PATIENT_SUCCESS,
+    type: FETCHING_USER_PATIENT_SUCCESS,
     uid,
     patients,
     timestamp,
@@ -85,14 +85,14 @@ function fetchingUserPatientsSuccess(uid, patients, timestamp) {
 function fetchingUserPatientsFailure(uid, error) {
   console.warn(error);
   return {
-    type: FETCHING_PATIENT_FAILURE,
+    type: FETCHING_USER_PATIENT_FAILURE,
     error: `Error fetching user: ${action.uid}`,
   }
 }
 
 export function removeFetchingUserPatients() {
   return {
-    type: REMOVE_FETCHING_PATIENT,
+    type: REMOVE_FETCHING_USER_PATIENT,
   }
 }
 

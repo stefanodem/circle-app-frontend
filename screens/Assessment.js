@@ -105,8 +105,7 @@ const IntervalScale = ({ question, currentValue, max, min, onSlide, metricAbbrev
           onValueChange={(value) => onSlide(value, 'numeric')}
           minimumValue={min}
           maximumValue={max}
-          thumbTintColor={'blue'}
-          />
+          thumbTintColor={'blue'} />
       </View>
 
       <Button

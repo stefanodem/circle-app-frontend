@@ -26,8 +26,9 @@ class TaskFeedScreen extends Component {
   }
 
   componentDidMount () {
-    const uid = this.props.navigation.state.params ? this.props.navigation.state.params.uid : null;
-    this.props.fetchAndHandleTasks(uid);
+    const patientId = this.props.navigation.state.params ? this.props.navigation.state.params.patientId : null;
+    this.props.fetchAndHandleTasks(patientId);
+    //this.props.fetchAndHandlePatient(patientId);
   }
 
   _renderTasks = ({ item }) => {

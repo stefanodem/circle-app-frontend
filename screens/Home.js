@@ -35,7 +35,7 @@ class HomeScreen extends Component {
     return (
       <ListItem
         key={item.id}
-        onPress={() => navigate('TaskFeed', {uid: item.id})}
+        onPress={() => navigate('TaskFeed', {patientId: item.id})}
         containerStyle={styles.container}
         roundAvatar
         avatar={{uri: item.avatar}}

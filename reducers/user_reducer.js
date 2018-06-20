@@ -5,10 +5,10 @@ import {
   FETCHING_USER_SUCCESS,
   FETCHING_USER_FAILURE,
   REMOVE_FETCHING_USER,
-  FETCHING_PATIENT,
-  FETCHING_PATIENT_SUCCESS,
-  FETCHING_PATIENT_FAILURE,
-  REMOVE_FETCHING_PATIENT,
+  FETCHING_USER_PATIENT,
+  FETCHING_USER_PATIENT_SUCCESS,
+  FETCHING_USER_PATIENT_FAILURE,
+  REMOVE_FETCHING_USER_PATIENT,
 } from '../actions/types';
 
 const initialState = {
@@ -54,12 +54,12 @@ export default function(state = initialState, action) {
         ...state,
         isFetching: false,
       };
-    case FETCHING_PATIENT:
+    case FETCHING_USER_PATIENT:
       return {
         ...state,
         isFetching: true,
       };
-    case FETCHING_PATIENT_SUCCESS:
+    case FETCHING_USER_PATIENT_SUCCESS:
       return action.patients === null
       ? {
         ...state,
@@ -71,13 +71,13 @@ export default function(state = initialState, action) {
         isFetching: false,
         patients: action.patients,
       }
-    case FETCHING_PATIENT_FAILURE:
+    case FETCHING_USER_PATIENT_FAILURE:
       return {
         ...state,
         isFetching: false,
         error: action.error,
       };
-    case REMOVE_FETCHING_PATIENT:
+    case REMOVE_FETCHING_USER_PATIENT:
       return {
         ...state,
         isFetching: false,

@@ -1,3 +1,130 @@
+export const patients = {
+  1: {
+    id: 1,
+    name: 'Föve',
+    avatar: 'https://vignette.wikia.nocookie.net/super-villain/images/9/91/3998596-dr-evil.jpg/revision/latest?cb=20140805055410',
+    nextVisit: 1511854675244,
+    createdAt: 1511854675244,
+    lastUpdated: null,
+    caregivers: {
+      1: {
+        uid: 1,
+        name: 'Sarah Miller',
+        avatar: 'https://vignette.wikia.nocookie.net/super-villain/images/9/91/3998596-dr-evil.jpg/revision/latest?cb=20140805055410',
+      },
+    },
+  },
+  2: {
+    id: 2,
+    name: 'Hedi',
+    avatar: 'https://vignette.wikia.nocookie.net/super-villain/images/9/91/3998596-dr-evil.jpg/revision/latest?cb=20140805055410',
+    nextVisit: 1511854675244,
+    createdAt: 1511854675244,
+    lastUpdated: null,
+    caregivers: {
+      1: {
+        uid: 1,
+        name: 'Sarah Miller',
+        avatar: 'https://vignette.wikia.nocookie.net/super-villain/images/9/91/3998596-dr-evil.jpg/revision/latest?cb=20140805055410',
+      },
+    },
+  },
+}
+
+export const patient = {
+  id: 1,
+  vitals: {
+    bloodPressure: {
+      name: 'Blood Pressure',
+      metric: 'mmHg',
+      input: {
+        systolic: '',
+        diastolic: '',
+      },
+    },
+    weight: {
+      name: 'Weight',
+      metric: 'kg',
+      input: '',
+    },
+    activity: {
+      name: 'Activity',
+      metric: 'steps',
+      input: '',
+    },
+  },
+  symptoms: {
+    head: {
+      name: 'Head',
+      symptoms: ['Hair loss', 'Dizziness', 'Nosebleed', 'Fever', 'Stress', 'Vision problems', 'Mood swings', 'Headache', 'Thirst', 'Hot flashes', 'Facial edema', 'Dental problems', 'Nausea'],
+      input: '',
+    },
+    chest: {
+      name: 'Chest',
+      symptoms: ['Heartburn', 'Shortness of breath', 'Palpitations'],
+      input: '',
+    },
+    belly: {
+      name: 'Belly',
+      symptoms: ['Pain', 'Injury', 'Vomiting', 'Tight skin', 'Thirst', 'Nausea'],
+      input: '',
+    },
+    armsAndHands: {
+      name: 'Arms & Hands',
+      symptoms: ['Edema', 'Itchiness'],
+      input: '',
+    },
+    genitalArea: {
+      name: 'Genital Area',
+      symptoms: ['Inury', 'Hemorrhoids', 'Constipation', 'Itchiness', 'Liquid loss', 'Sore urination'],
+      input: '',
+    },
+    back: {
+      name: 'Back',
+      symptoms: ['Pain'],
+      input: '',
+    },
+    legsAndFeet: {
+      name: 'Legs & Feet',
+      symptoms: ['Edema', 'Itchiness'],
+      input: '',
+    },
+    allBody: {
+      name: 'All Body',
+      symptoms: ['Fever', 'Itchiness', 'Hot flashes'],
+      input: '',
+    },
+  },
+  conditions: {
+    mood: {
+      input: '',
+    },
+    vitality: {
+      input: '',
+    },
+    fatigue: {
+      input: '',
+    },
+  }
+}
+
+const conditionTypes = [
+  'cognition',
+  'communication',
+  'vision',
+  'mood & behavior',
+  'psychological well-being',
+  'functional status',
+  'continence',
+  'health conditions',
+  'oral & nutrition',
+  'skin',
+  'medication',
+  'resonsibility',
+  'social support',
+  'environment',
+]
+
 export const tasks = {
     1: {
       id: 1,
@@ -10,6 +137,24 @@ export const tasks = {
       comments: {
         1: {
           id: 1,
+          uid: '123',
+          name: "Steve",
+          avatar: "http://www.avatarsdb.com/avatars/spongebob_happy.jpg",
+          createdAt: 1511854675244,
+          body: "Hey there whats up hows it going",
+          lastUpdated: null,
+        },
+        5: {
+          id: 5,
+          uid: '123',
+          name: "Steve",
+          avatar: "http://www.avatarsdb.com/avatars/spongebob_happy.jpg",
+          createdAt: 1511854675244,
+          body: "Hey there whats up hows it going",
+          lastUpdated: null,
+        },
+        6: {
+          id: 6,
           uid: '123',
           name: "Steve",
           avatar: "http://www.avatarsdb.com/avatars/spongebob_happy.jpg",

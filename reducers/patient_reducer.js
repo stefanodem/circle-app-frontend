@@ -8,7 +8,10 @@ import {
 const initialState = {
   isFetching: true,
   error: '',
-  patients: '',
+  patientId: '',
+  vitals: null,
+  symptoms: null,
+  conditions: null,
 }
 
 export default function(state = initialState, action) {
@@ -28,7 +31,10 @@ export default function(state = initialState, action) {
       : {
         ...state,
         isFetching: false,
-        patients: action.patients,
+        patientId: action.patient.Id,
+        vitals: action.patient.vitals,
+        symptoms: action.patient.symptoms,
+        conditions: action.patient.conditions,
       }
     case FETCHING_PATIENT_FAILURE:
       return {
