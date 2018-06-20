@@ -5,6 +5,20 @@ import _values from 'lodash/values';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+const getThumbTintColor = (value) => {
+  if (value === 0) {
+    return 'red';
+  } else if (value === 1) {
+    return 'orange';
+  } else if (value === 2) {
+    return 'yellow';
+  } else if (value === 3) {
+    return 'lightgreen';
+  } else if (value === 4) {
+    return 'green';
+  }
+}
+
 const SectionDescription = props => {
   const {
     title,
@@ -27,7 +41,41 @@ const SectionDescription = props => {
 }
 
 const SliderSection = props => {
+  const {
+    leftIndicatorText,
+    rightIndicatorText,
+    title,
+    type,
+    onUpdateValue,
+  } = props;
+  var {
+    value,
+  } = props;
 
+  if (!value) { value = 2 }
+
+  return (
+    <View
+      style={{ flex: 1, alignItems: 'stretch', paddingBottom: 30 }} >
+      <Text
+        style={styles.smallSectionTitle} >{title}</Text>
+      <View
+        style={{flex: 1, flexDirection: 'row'}}>
+        <Text
+          style={styles.leftIndicator}>{leftIndicatorText}</Text>
+        <Text
+          style={styles.rightIndicator}>{rightIndicatorText}</Text>
+      </View>
+      <Slider
+        value={value}
+        thumbStyle={styles.thumb}
+        onValueChange={(value) => onUpdateValue(type, value)}
+        step={1}
+        minimumValue={0}
+        maximumValue={4}
+        thumbTintColor={'blue'} />
+    </View>
+  )
 }
 
 
@@ -57,7 +105,6 @@ class CareAssessmentScreen extends Component {
       <View
         style={{flex: 1, marginRight: 15}}>
         <Avatar
-          containerStyle={{ marginRight: 0 }}
           medium
           rounded
           icon={{name: 'home'}}
@@ -71,6 +118,8 @@ class CareAssessmentScreen extends Component {
 
   render() {
     const { isFetching, vitals, symptoms, conditions } = this.props.patient;
+    const { updateConditionInput } = this.props;
+    console.log(this.props.patient.conditions)
 
     if (isFetching) {
       return (
@@ -116,47 +165,29 @@ class CareAssessmentScreen extends Component {
           title={"Condition"}
           description={"Conditions that are measured based on a regular basis."} />
 
-        <View
-          style={{ flex: 1, alignItems: 'stretch', paddingBottom: 30 }} >
-          <Text
-            style={styles.smallSectionTitle} >{"Mood"}</Text>
-          <Slider
-            value={2}
-            thumbStyle={styles.thumb}
-            onValueChange={() => console.log("slide")}
-            step={1}
-            minimumValue={0}
-            maximumValue={4}
-            thumbTintColor={'blue'} />
-        </View>
+        <SliderSection
+          title={"Mood"}
+          type={"mood"}
+          leftIndicatorText={"Sad"}
+          rightIndicatorText={"Happy"}
+          value={conditions.mood.input}
+          onUpdateValue={updateConditionInput} />
 
-        <View
-          style={{ flex: 1, alignItems: 'stretch', paddingBottom: 30 }} >
-          <Text
-            style={styles.smallSectionTitle} >{"Vitality"}</Text>
-          <Slider
-            value={2}
-            thumbStyle={styles.thumb}
-            onValueChange={() => console.log("slide")}
-            step={1}
-            minimumValue={0}
-            maximumValue={4}
-            thumbTintColor={'blue'} />
-        </View>
+        <SliderSection
+          title={"Vitality"}
+          type={"vitality"}
+          leftIndicatorText={"Faint"}
+          rightIndicatorText={"Fit"}
+          value={conditions.vitality.input}
+          onUpdateValue={updateConditionInput} />
 
-        <View
-          style={{ flex: 1, alignItems: 'stretch', paddingBottom: 30 }} >
-          <Text
-            style={styles.smallSectionTitle} >{"Fatigue"}</Text>
-          <Slider
-            value={2}
-            thumbStyle={styles.thumb}
-            onValueChange={() => console.log("slide")}
-            step={1}
-            minimumValue={0}
-            maximumValue={4}
-            thumbTintColor={'blue'} />
-        </View>
+        <SliderSection
+          title={"Fatigue"}
+          type={"fatigue"}
+          leftIndicatorText={"Tired"}
+          rightIndicatorText={"Energetic"}
+          value={conditions.fatigue.input}
+          onUpdateValue={updateConditionInput} />
 
         <View
           style={styles.button} >
@@ -198,6 +229,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'grey',
     paddingBottom: 5,
+  },
+  leftIndicator: {
+    flex: 1,
+    textAlign: 'left',
+    alignSelf: 'stretch',
+    paddingLeft: 10,
+    color: 'grey'
+  },
+  rightIndicator: {
+    flex: 1,
+    textAlign: 'right',
+    alignSelf: 'stretch',
+    paddingRight: 10,
+    color: 'grey'
   },
   sectionDescription: {
     fontSize: 14,

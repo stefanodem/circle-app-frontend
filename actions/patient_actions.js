@@ -3,6 +3,7 @@ import {
   FETCHING_PATIENT_SUCCESS,
   FETCHING_PATIENT_FAILURE,
   REMOVE_FETCHING_PATIENT,
+  UPDATE_CONDITION_INPUT,
 } from './types';
 
 import {
@@ -45,5 +46,13 @@ export const fetchAndHandlePatient = (patientId) => {
     return fetchPatient(patientId)
       .then((patient) => dispatch(fetchingPatientSuccess(patientId, patient, Date.now())))
       .catch((error) => dispatch(fetchingPatientFailure(patientId, error)))
+  }
+}
+
+export const updateConditionInput = (type, input) => {
+  return {
+    type: UPDATE_CONDITION_INPUT,
+    conditionType: type,
+    input,
   }
 }

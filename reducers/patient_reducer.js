@@ -3,6 +3,7 @@ import {
   FETCHING_PATIENT_SUCCESS,
   FETCHING_PATIENT_FAILURE,
   REMOVE_FETCHING_PATIENT,
+  UPDATE_CONDITION_INPUT,
 } from '../actions/types';
 
 const initialState = {
@@ -46,6 +47,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
+      };
+    case UPDATE_CONDITION_INPUT:
+      return {
+        ...state,
+        conditions: {
+          ...state.conditions,
+          [action.conditionType]: {
+            input: action.input,
+          }
+        }
       };
     default:
       return state;
