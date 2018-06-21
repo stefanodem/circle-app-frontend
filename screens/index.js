@@ -5,3 +5,4 @@ export Assessment from './Assessment';
 export Home from './Home';
 export Chat from './Chat';
 export CareAssessment from './CareAssessment';
+export CareAssessmentInput from './CareAssessmentInput';

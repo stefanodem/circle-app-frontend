@@ -1,22 +1,40 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView, FlatList, Text, AsyncStorage, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ScrollView, FlatList, Text, AsyncStorage, ActivityIndicator, PickerIOS } from 'react-native';
 import { Avatar, Slider, Button } from 'react-native-elements';
 import _values from 'lodash/values';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 const getThumbTintColor = (value) => {
-  if (value === 0) {
+  if (value === 1) {
     return 'red';
-  } else if (value === 1) {
-    return 'orange';
   } else if (value === 2) {
-    return 'yellow';
+    return 'orange';
   } else if (value === 3) {
-    return 'lightgreen';
+    return 'yellow';
   } else if (value === 4) {
+    return 'lightgreen';
+  } else if (value === 5) {
     return 'green';
   }
+}
+
+const InputSection = props => {
+  const max = 20
+  const min = 0
+  return (
+    <View
+      style={styles.section} >
+      <Text
+        style={styles.sectionTitle} >
+        {'sdfsdf'}
+      </Text>
+      <Text
+        style={styles.sectionDescription} >
+        {'sdfsdf'}
+      </Text>
+    </View>
+  )
 }
 
 const SectionDescription = props => {
@@ -47,12 +65,15 @@ const SliderSection = props => {
     title,
     type,
     onUpdateValue,
+    min,
+    max
   } = props;
+
   var {
     value,
   } = props;
 
-  if (!value) { value = 2 }
+  if (!value) { value = Math.round((max+min)/2) }
 
   return (
     <View
@@ -71,9 +92,9 @@ const SliderSection = props => {
         thumbStyle={styles.thumb}
         onValueChange={(value) => onUpdateValue(type, value)}
         step={1}
-        minimumValue={0}
-        maximumValue={4}
-        thumbTintColor={'blue'} />
+        minimumValue={min}
+        maximumValue={max}
+        thumbTintColor={getThumbTintColor(value)} />
     </View>
   )
 }
@@ -101,6 +122,7 @@ class CareAssessmentScreen extends Component {
   _renderComponents = ({ item }) => {
     const name = item.name.replace(" ", "\n")
 
+
     return (
       <View
         style={{flex: 1, marginRight: 15}}>
@@ -108,7 +130,7 @@ class CareAssessmentScreen extends Component {
           medium
           rounded
           icon={{name: 'home'}}
-          onPress={() => console.log("Works!")}
+          onPress={() => this.props.navigation.navigate('CareAssessmentInput', { assessment: item })}
           activeOpacity={0.7} />
         <Text
           style={styles.avatarTitle} >{name}</Text>
@@ -119,7 +141,6 @@ class CareAssessmentScreen extends Component {
   render() {
     const { isFetching, vitals, symptoms, conditions } = this.props.patient;
     const { updateConditionInput } = this.props;
-    console.log(this.props.patient.conditions)
 
     if (isFetching) {
       return (
@@ -171,6 +192,8 @@ class CareAssessmentScreen extends Component {
           leftIndicatorText={"Sad"}
           rightIndicatorText={"Happy"}
           value={conditions.mood.input}
+          max={5}
+          min={1}
           onUpdateValue={updateConditionInput} />
 
         <SliderSection
@@ -179,6 +202,8 @@ class CareAssessmentScreen extends Component {
           leftIndicatorText={"Faint"}
           rightIndicatorText={"Fit"}
           value={conditions.vitality.input}
+          max={5}
+          min={1}
           onUpdateValue={updateConditionInput} />
 
         <SliderSection
@@ -187,6 +212,8 @@ class CareAssessmentScreen extends Component {
           leftIndicatorText={"Tired"}
           rightIndicatorText={"Energetic"}
           value={conditions.fatigue.input}
+          max={5}
+          min={1}
           onUpdateValue={updateConditionInput} />
 
         <View
@@ -198,6 +225,8 @@ class CareAssessmentScreen extends Component {
             title={'Submit'}
             onPress={() => console.log("submit")} />
         </View>
+
+        <InputSection />
 
       </ScrollView>
     );

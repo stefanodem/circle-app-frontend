@@ -36,6 +36,22 @@ export const patient = {
   vitals: {
     bloodPressure: {
       name: 'Blood Pressure',
+      description: 'Blood Pressure is like really important kinda like',
+      symptoms:[
+        {id: 1, title: 'Hair loss', checked: false},
+        {id: 2, title: 'Dizziness', checked: false},
+        {id: 3, title: 'Nosebleed', checked: false},
+        {id: 4, title: 'Fever', checked: false},
+        {id: 5, title: 'Stress', checked: false},
+        {id: 6, title: 'Vision problems', checked: false},
+        {id: 7, title: 'Mood swings', checked: false},
+        {id: 8, title: 'Headache', checked: false},
+        {id: 9, title: 'Thirst', checked: false},
+        {id: 10, title: 'Hot flashes', checked: false},
+        {id: 11, title: 'Facial edema', checked: false},
+        {id: 12, title: 'Dental problems', checked: false},
+        {id: 13, title: 'Nausea', checked: false}
+      ],
       metric: 'mmHg',
       input: {
         systolic: '',
@@ -44,11 +60,13 @@ export const patient = {
     },
     weight: {
       name: 'Weight',
+      description: '',
       metric: 'kg',
       input: '',
     },
     activity: {
       name: 'Activity',
+      description: '',
       metric: 'steps',
       input: '',
     },
@@ -56,53 +74,67 @@ export const patient = {
   symptoms: {
     head: {
       name: 'Head',
+      description: '',
       symptoms: ['Hair loss', 'Dizziness', 'Nosebleed', 'Fever', 'Stress', 'Vision problems', 'Mood swings', 'Headache', 'Thirst', 'Hot flashes', 'Facial edema', 'Dental problems', 'Nausea'],
       input: '',
     },
     chest: {
       name: 'Chest',
+      description: '',
       symptoms: ['Heartburn', 'Shortness of breath', 'Palpitations'],
       input: '',
     },
     belly: {
       name: 'Belly',
+      description: '',
       symptoms: ['Pain', 'Injury', 'Vomiting', 'Tight skin', 'Thirst', 'Nausea'],
       input: '',
     },
     armsAndHands: {
       name: 'Arms & Hands',
+      description: '',
       symptoms: ['Edema', 'Itchiness'],
       input: '',
     },
     genitalArea: {
       name: 'Genital Area',
+      description: '',
       symptoms: ['Inury', 'Hemorrhoids', 'Constipation', 'Itchiness', 'Liquid loss', 'Sore urination'],
       input: '',
     },
     back: {
       name: 'Back',
+      description: '',
       symptoms: ['Pain'],
       input: '',
     },
     legsAndFeet: {
       name: 'Legs & Feet',
+      description: '',
       symptoms: ['Edema', 'Itchiness'],
       input: '',
     },
     allBody: {
       name: 'All Body',
+      description: '',
       symptoms: ['Fever', 'Itchiness', 'Hot flashes'],
       input: '',
     },
   },
   conditions: {
     mood: {
+      name: 'Mood',
+      description: '',
       input: '',
     },
     vitality: {
+      name: 'Vitality',
+      description: '',
       input: '',
     },
     fatigue: {
+      name: 'Fatigue',
+      description: '',
       input: '',
     },
   }
