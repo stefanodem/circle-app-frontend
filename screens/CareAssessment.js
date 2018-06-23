@@ -63,7 +63,7 @@ const SliderSection = props => {
     leftIndicatorText,
     rightIndicatorText,
     title,
-    type,
+    condition,
     onUpdateValue,
     min,
     max
@@ -90,7 +90,7 @@ const SliderSection = props => {
       <Slider
         value={value}
         thumbStyle={styles.thumb}
-        onValueChange={(value) => onUpdateValue(type, value)}
+        onValueChange={(value) => onUpdateValue(condition.id, value)}
         step={1}
         minimumValue={min}
         maximumValue={max}
@@ -188,7 +188,7 @@ class CareAssessmentScreen extends Component {
 
         <SliderSection
           title={"Mood"}
-          type={"mood"}
+          condition={conditions["1"]}
           leftIndicatorText={"Sad"}
           rightIndicatorText={"Happy"}
           value={conditions["1"].input}
@@ -198,7 +198,7 @@ class CareAssessmentScreen extends Component {
 
         <SliderSection
           title={"Vitality"}
-          type={"vitality"}
+          condition={conditions["2"]}
           leftIndicatorText={"Faint"}
           rightIndicatorText={"Fit"}
           value={conditions["2"].input}
@@ -208,7 +208,7 @@ class CareAssessmentScreen extends Component {
 
         <SliderSection
           title={"Fatigue"}
-          type={"fatigue"}
+          condition={conditions["3"]}
           leftIndicatorText={"Tired"}
           rightIndicatorText={"Energetic"}
           value={conditions["3"].input}

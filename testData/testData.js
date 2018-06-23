@@ -55,7 +55,7 @@ export const patient = {
         {id: 13, title: 'Nausea', checked: false}
       ],
       metric: 'mmHg',
-      input: 6,
+      input: null,
       // input: {
       //   systolic: '',
       //   diastolic: '',
@@ -67,7 +67,7 @@ export const patient = {
       name: 'Weight',
       description: '',
       metric: 'kg',
-      input: '',
+      input: null,
     },
     3: {
       id: 3,
@@ -75,7 +75,7 @@ export const patient = {
       name: 'Activity',
       description: '',
       metric: 'steps',
-      input: '',
+      input: null,
     },
   },
   symptoms: {

@@ -18,6 +18,7 @@ const getPickerItems = (max, min) => {
 
 const PickerSection = (props) => {
   const {
+    assessment,
     value,
     max,
     min,
@@ -36,9 +37,9 @@ const PickerSection = (props) => {
     <View
       style={{flexDirection: 'row'}} >
       <Picker
-        selectedValue={value}
+        selectedValue={assessment.input}
         style={{ flex: 4 }}
-        onValueChange={(itemValue, itemIndex) => onValueChange(1, 'vitals', itemValue)}>
+        onValueChange={(itemValue, itemIndex) => onValueChange(assessment.id, assessment.assessmentType, itemValue)}>
         {getPickerItems(max, min)}
       </Picker>
       <Text
@@ -116,9 +117,9 @@ class CareAssessmentInputScreen extends Component {
         </View>
 
         <PickerSection
-          value={assessment.input}
+          assessment={assessment}
           onValueChange={this.props.updateAssessmentInput}
-          metric={"mg/dL"} />
+          metric={assessment.metric} />
 
         <BadgeSection
           assessment={assessment}

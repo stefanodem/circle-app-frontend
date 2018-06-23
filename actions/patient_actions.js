@@ -51,10 +51,10 @@ export const fetchAndHandlePatient = (patientId) => {
   }
 }
 
-export const updateConditionInput = (type, input) => {
+export const updateConditionInput = (conditionId, input) => {
   return {
     type: UPDATE_CONDITION_INPUT,
-    conditionType: type,
+    conditionId,
     input,
   }
 }

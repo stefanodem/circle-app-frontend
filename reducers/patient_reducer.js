@@ -55,7 +55,8 @@ export default function(state = initialState, action) {
         ...state,
         conditions: {
           ...state.conditions,
-          [action.conditionType]: {
+          [action.conditionId]: {
+            ...state.conditions[action.conditionId],
             input: action.input,
           }
         }
