@@ -117,7 +117,7 @@ class CareAssessmentScreen extends Component {
     this.props.fetchAndHandlePatient('1')
   }
 
-  _keyExtractor = (item, index) => item.name;
+  _keyExtractor = (item, index) => item.id;
 
   _renderComponents = ({ item }) => {
     const name = item.name.replace(" ", "\n")
@@ -191,7 +191,7 @@ class CareAssessmentScreen extends Component {
           type={"mood"}
           leftIndicatorText={"Sad"}
           rightIndicatorText={"Happy"}
-          value={conditions.mood.input}
+          value={conditions["1"].input}
           max={5}
           min={1}
           onUpdateValue={updateConditionInput} />
@@ -201,7 +201,7 @@ class CareAssessmentScreen extends Component {
           type={"vitality"}
           leftIndicatorText={"Faint"}
           rightIndicatorText={"Fit"}
-          value={conditions.vitality.input}
+          value={conditions["2"].input}
           max={5}
           min={1}
           onUpdateValue={updateConditionInput} />
@@ -211,7 +211,7 @@ class CareAssessmentScreen extends Component {
           type={"fatigue"}
           leftIndicatorText={"Tired"}
           rightIndicatorText={"Energetic"}
-          value={conditions.fatigue.input}
+          value={conditions["3"].input}
           max={5}
           min={1}
           onUpdateValue={updateConditionInput} />

@@ -4,6 +4,8 @@ import {
   FETCHING_PATIENT_FAILURE,
   REMOVE_FETCHING_PATIENT,
   UPDATE_CONDITION_INPUT,
+  UPDATE_ASSESSMENT_INPUT,
+  TOGGLE_BADGE,
 } from './types';
 
 import {
@@ -54,5 +56,23 @@ export const updateConditionInput = (type, input) => {
     type: UPDATE_CONDITION_INPUT,
     conditionType: type,
     input,
+  }
+}
+
+export const updateAssessmentInput = (assessmentId, assessmentType, input) => {
+  return {
+    type: UPDATE_ASSESSMENT_INPUT,
+    assessmentType,
+    assessmentId,
+    input,
+  }
+}
+
+export const toggleBadge = (badgeId, assessmentId, assessmentType) => {
+  return {
+    type: TOGGLE_BADGE,
+    assessmentType,
+    assessmentId,
+    badgeId,
   }
 }

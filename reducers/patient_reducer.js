@@ -4,6 +4,8 @@ import {
   FETCHING_PATIENT_FAILURE,
   REMOVE_FETCHING_PATIENT,
   UPDATE_CONDITION_INPUT,
+  UPDATE_ASSESSMENT_INPUT,
+  TOGGLE_BADGE,
 } from '../actions/types';
 
 const initialState = {
@@ -58,6 +60,33 @@ export default function(state = initialState, action) {
           }
         }
       };
+    case UPDATE_ASSESSMENT_INPUT:
+      return {
+        ...state,
+        [action.assessmentType]: {
+          ...state[action.assessmentType],
+          [action.assessmentId] :{
+            ...state[action.assessmentType][action.assessmentId],
+            input: action.input,
+          }
+        }
+      };
+    case TOGGLE_BADGE:
+      return {
+        ...state,
+        [action.assessmentType]: {
+          ...state[action.assessmentType],
+          [action.assessmentId]: {
+            ...state[action.assessmentType][action.assessmentId],
+            dimensions: state[action.assessmentType][action.assessmentId].dimensions.map(dimension => {
+            if (dimension.id === action.badgeId) {
+              dimension.checked = !dimension.checked;
+            }
+            return dimension;
+          })
+          }
+        }
+      }
     default:
       return state;
   }

@@ -38,7 +38,7 @@ const PickerSection = (props) => {
       <Picker
         selectedValue={value}
         style={{ flex: 4 }}
-        onValueChange={(itemValue, itemIndex) => console.log('hi')}>
+        onValueChange={(itemValue, itemIndex) => onValueChange(1, 'vitals', itemValue)}>
         {getPickerItems(max, min)}
       </Picker>
       <Text
@@ -49,9 +49,11 @@ const PickerSection = (props) => {
 
 const BadgeSection = (props) => {
   const {
-    choices,
+    assessment,
     checked,
+    onPress,
   } = props;
+  const choices = assessment.dimensions;
 
   return (
     <View
@@ -61,7 +63,8 @@ const BadgeSection = (props) => {
           return (
             <TouchableHighlight
               key={choice.id}
-              style={styles.badge}
+              onPress={() => onPress(choice.id, assessment.id, assessment.assessmentType)}
+              style={choice.checked ? styles.uncheckedBadge : styles.checkedBadge}
               underlayColor={'white'} >
               <Text
                 style={styles.badgeText}>{choice.title}</Text>
@@ -84,9 +87,9 @@ class CareAssessmentInputScreen extends Component {
   }
 
   render() {
-    const { isFetching, vitals, symptoms, conditions } = this.props.patient;
-    const assessment = this.props.navigation.state.params.assessment;
-    console.log(assessment)
+    const { isFetching } = this.props.patient;
+    const navAssessment = this.props.navigation.state.params.assessment;
+    const assessment = this.props.patient[navAssessment.assessmentType][navAssessment.id]
 
     if (isFetching) {
       return (
@@ -113,11 +116,13 @@ class CareAssessmentInputScreen extends Component {
         </View>
 
         <PickerSection
-          value={5}
+          value={assessment.input}
+          onValueChange={this.props.updateAssessmentInput}
           metric={"mg/dL"} />
 
         <BadgeSection
-          choices={assessment.symptoms} />
+          assessment={assessment}
+          onPress={this.props.toggleBadge} />
 
         <View
           style={styles.button} >
@@ -166,7 +171,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
   },
-  badge: {
+  checkedBadge: {
     margin: 7,
     borderRadius: 30,
     height: 35,
@@ -177,6 +182,22 @@ const styles = StyleSheet.create({
     paddingTop: 14,
     paddingBottom: 14,
     backgroundColor: 'blue',
+    shadowColor: 'rgba(0,0,0, .4)',
+    shadowOffset: { height: 1, width: 1 },
+    shadowOpacity: 1,
+    shadowRadius: 1,
+  },
+  uncheckedBadge: {
+    margin: 7,
+    borderRadius: 30,
+    height: 35,
+    width: 95,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 14,
+    paddingBottom: 14,
+    backgroundColor: 'pink',
     shadowColor: 'rgba(0,0,0, .4)',
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 1,
