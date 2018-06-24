@@ -58,6 +58,7 @@ export default function(state = initialState, action) {
           [action.conditionId]: {
             ...state.conditions[action.conditionId],
             input: action.input,
+            wasEdited: true,
           }
         }
       };
@@ -69,23 +70,47 @@ export default function(state = initialState, action) {
           [action.assessmentId] :{
             ...state[action.assessmentType][action.assessmentId],
             input: action.input,
+            wasEdited: true,
           }
         }
       };
     case TOGGLE_BADGE:
-      return {
-        ...state,
-        [action.assessmentType]: {
-          ...state[action.assessmentType],
-          [action.assessmentId]: {
-            ...state[action.assessmentType][action.assessmentId],
-            dimensions: state[action.assessmentType][action.assessmentId].dimensions.map(dimension => {
-            if (dimension.id === action.badgeId) {
-              dimension.checked = !dimension.checked;
+      if (action.assessmentType === 'vitals') {
+        return {
+          ...state,
+          [action.assessmentType]: {
+            ...state[action.assessmentType],
+            [action.assessmentId]: {
+              ...state[action.assessmentType][action.assessmentId],
+              dimensions: state[action.assessmentType][action.assessmentId].dimensions.map(dimension => {
+                  if (dimension.id === action.badgeId) {
+                    dimension.checked = !dimension.checked;
+                  }
+                  return dimension;
+                }),
             }
-            return dimension;
-          })
           }
+        }
+      } else if (action.assessmentType === 'symptoms') {
+        return {
+          ...state,
+          [action.assessmentType]: {
+            ...state[action.assessmentType],
+            [action.assessmentId]: {
+              ...state[action.assessmentType][action.assessmentId],
+              symptoms: state[action.assessmentType][action.assessmentId].symptoms.map(symptom => {
+                  if (symptom.id === action.badgeId) {
+                    symptom.checked = !symptom.checked;
+                  }
+                  return symptom;
+                }),
+              wasEdited: true,
+            }
+          }
+        }
+      } else {
+        return {
+          ...state,
         }
       }
     default:

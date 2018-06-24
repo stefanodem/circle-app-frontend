@@ -16,31 +16,69 @@ const getPickerItems = (max, min) => {
   })
 }
 
+const SectionDescription = props => {
+  const {
+    title,
+    description,
+  } = props;
+
+  return (
+    <View
+      style={styles.section} >
+      <Text
+        style={styles.sectionTitle} >
+        {title}
+      </Text>
+      <Text
+        style={styles.sectionDescription} >
+        {description}
+      </Text>
+    </View>
+  )
+}
+
 const PickerSection = (props) => {
   const {
-    assessment,
+    assessmentId,
+    assessmentType,
+    inputType,
     value,
     max,
     min,
     metric,
     choices,
     onValueChange,
-    secondValue,
-    secondMax,
-    secondMin,
-    secondMetric,
-    secondChoices,
-    onSecondValueChange,
+    // secondValue,
+    // secondMax,
+    // secondMin,
+    // secondMetric,
+    // secondChoices,
+    // onSecondValueChange,
   } = props;
+
+  let pickerItem;
+
+  if (inputType === 'Integer') {
+    pickerItem = getPickerItems(max, min);
+  } else if (inputType === 'String' && choices) {
+    pickerItem = choices.map(choice => {
+      return (
+        <Picker.Item
+          key={choice.id}
+          label={String(choice.id)}
+          value={choice.title} />
+      )
+    })
+  }
 
   return (
     <View
       style={{flexDirection: 'row'}} >
       <Picker
-        selectedValue={assessment.input}
+        selectedValue={value}
         style={{ flex: 4 }}
-        onValueChange={(itemValue, itemIndex) => onValueChange(assessment.id, assessment.assessmentType, itemValue)}>
-        {getPickerItems(max, min)}
+        onValueChange={(itemValue, itemIndex) => onValueChange(assessmentId, assessmentType, itemValue)}>
+        {pickerItem}
       </Picker>
       <Text
         style={styles.pickerText}>{metric}</Text>
@@ -50,11 +88,12 @@ const PickerSection = (props) => {
 
 const BadgeSection = (props) => {
   const {
-    assessment,
+    assessmentId,
+    assessmentType,
+    choices,
     checked,
     onPress,
   } = props;
-  const choices = assessment.dimensions;
 
   return (
     <View
@@ -64,11 +103,11 @@ const BadgeSection = (props) => {
           return (
             <TouchableHighlight
               key={choice.id}
-              onPress={() => onPress(choice.id, assessment.id, assessment.assessmentType)}
-              style={choice.checked ? styles.uncheckedBadge : styles.checkedBadge}
+              onPress={() => onPress(choice.id, assessmentId, assessmentType)}
+              style={choice.checked ? styles.checkedBadge : styles.uncheckedBadge}
               underlayColor={'white'} >
               <Text
-                style={styles.badgeText}>{choice.title}</Text>
+                style={choice.checked ? styles.checkedBadgeText : styles.uncheckedBadgeText}>{choice.title}</Text>
             </TouchableHighlight>
           )
         })}
@@ -91,6 +130,38 @@ class CareAssessmentInputScreen extends Component {
     const { isFetching } = this.props.patient;
     const navAssessment = this.props.navigation.state.params.assessment;
     const assessment = this.props.patient[navAssessment.assessmentType][navAssessment.id]
+    let inputSection;
+    console.log(assessment)
+
+    if (navAssessment.assessmentType === 'vitals') {
+      inputSection = (
+        <View>
+          <PickerSection
+            assessmentId={assessment.id}
+            assessmentType={assessment.assessmentType}
+            inputType={assessment.inputType}
+            value={assessment.input}
+            onValueChange={this.props.updateAssessmentInput}
+            metric={assessment.metric} />
+
+          {assessment.wasEdited &&
+            <BadgeSection
+              assessmentId={assessment.id}
+              assessmentType={assessment.assessmentType}
+              choices={assessment.dimensions}
+              onPress={this.props.toggleBadge} />}
+        </View>
+      )
+
+    } else if (navAssessment.assessmentType === 'symptoms') {
+      inputSection =  (
+        <BadgeSection
+          assessmentId={assessment.id}
+          assessmentType={assessment.assessmentType}
+          choices={assessment.symptoms}
+          onPress={this.props.toggleBadge} />
+      )
+    }
 
     if (isFetching) {
       return (
@@ -104,36 +175,22 @@ class CareAssessmentInputScreen extends Component {
       <ScrollView
         style={styles.container} >
 
-        <View
-          style={styles.section} >
-          <Text
-            style={styles.sectionTitle} >
-            {assessment.name}
-          </Text>
-          <Text
-            style={styles.sectionDescription} >
-            {assessment.description}
-          </Text>
-        </View>
+        <SectionDescription
+          title={assessment.name}
+          description={assessment.description} />
 
-        <PickerSection
-          assessment={assessment}
-          onValueChange={this.props.updateAssessmentInput}
-          metric={assessment.metric} />
+        {inputSection}
 
-        <BadgeSection
-          assessment={assessment}
-          onPress={this.props.toggleBadge} />
-
-        <View
+        {assessment.wasEdited &&
+          <View
           style={styles.button} >
-          <Button
-            raised
-            fontSize={18}
-            backgroundColor={'blue'}
-            title={'Submit'}
-            onPress={() => this.props.navigation.goBack()} />
-        </View>
+            <Button
+              raised
+              fontSize={18}
+              backgroundColor={'blue'}
+              title={'Submit'}
+              onPress={() => this.props.navigation.goBack()} />
+          </View>}
 
       </ScrollView>
     );
@@ -171,6 +228,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'row',
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   checkedBadge: {
     margin: 7,
@@ -188,9 +247,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 1,
   },
+  checkedBadgeText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
   uncheckedBadge: {
     margin: 7,
     borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'blue',
     height: 35,
     width: 95,
     flexDirection: 'row',
@@ -198,14 +263,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 14,
     paddingBottom: 14,
-    backgroundColor: 'pink',
+    backgroundColor: 'white',
     shadowColor: 'rgba(0,0,0, .4)',
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 1,
     shadowRadius: 1,
   },
-  badgeText: {
-    color: 'white',
+  uncheckedBadgeText: {
+    color: 'blue',
     fontWeight: 'bold',
   },
   pickerText: {

@@ -19,24 +19,6 @@ const getThumbTintColor = (value) => {
   }
 }
 
-const InputSection = props => {
-  const max = 20
-  const min = 0
-  return (
-    <View
-      style={styles.section} >
-      <Text
-        style={styles.sectionTitle} >
-        {'sdfsdf'}
-      </Text>
-      <Text
-        style={styles.sectionDescription} >
-        {'sdfsdf'}
-      </Text>
-    </View>
-  )
-}
-
 const SectionDescription = props => {
   const {
     title,
@@ -94,7 +76,7 @@ const SliderSection = props => {
         step={1}
         minimumValue={min}
         maximumValue={max}
-        thumbTintColor={getThumbTintColor(value)} />
+        thumbTintColor={condition.wasEdited ? getThumbTintColor(value) : 'lightgrey'} />
     </View>
   )
 }
@@ -129,11 +111,12 @@ class CareAssessmentScreen extends Component {
         <Avatar
           medium
           rounded
+          overlayContainerStyle={item.wasEdited && {backgroundColor: 'blue'} }
           icon={{name: 'home'}}
           onPress={() => this.props.navigation.navigate('CareAssessmentInput', { assessment: item })}
           activeOpacity={0.7} />
         <Text
-          style={styles.avatarTitle} >{name}</Text>
+          style={[styles.avatarTitle, item.wasEdited ? {color: 'royalblue'} : {color: 'grey'}]} >{name}</Text>
       </View>
     )
   }
@@ -226,8 +209,6 @@ class CareAssessmentScreen extends Component {
             onPress={() => console.log("submit")} />
         </View>
 
-        <InputSection />
-
       </ScrollView>
     );
   }
@@ -281,7 +262,6 @@ const styles = StyleSheet.create({
     paddingTop: 3,
     fontSize: 11,
     fontWeight: 'bold',
-    color: 'royalblue',
   },
   button: {
     paddingBottom: 60,
