@@ -17,6 +17,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
 import { Comment } from '../components';
+import { InputToolbar } from 'react-native-gifted-chat';
+import { MIN_COMPOSER_HEIGHT } from '../config/constants';
 
 const TaskDetail = ({ title, text, icon, iconColor }) => {
   return (
@@ -80,6 +82,13 @@ const TaskAssignees = ({ title, icon, iconColor }) => {
 }
 
 class TaskDetailsScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      commentText: '',
+    };
+  }
+
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
@@ -88,11 +97,29 @@ class TaskDetailsScreen extends Component {
     };
   }
 
+  _onInputTextChange(text) {
+    if (text) {
+      this.setState({
+        commentText: text,
+      });
+    }
+  }
+
+  _onSubmitComment(uid, taskId, message) {
+    if (message) {
+      this.setState({
+        commentText: '',
+      });
+      this.props.submitComment(uid, taskId, message)
+    }
+  }
+
   render() {
     const isFetching = this.props.task.isFetching;
     const taskId = this.props.navigation.state.params ? this.props.navigation.state.params.taskId : null;
     const taskDetails = this.props.task.tasks[taskId];
     const comments = _values(taskDetails.comments);
+    const user = this.props.user;
 
     if (isFetching) {
       return (
@@ -103,6 +130,7 @@ class TaskDetailsScreen extends Component {
     }
 
     return (
+      <View style={styles.container}>
       <ScrollView>
 
         <View
@@ -112,30 +140,30 @@ class TaskDetailsScreen extends Component {
             title={'Task'}
             text={ taskDetails.taskDescription }
             icon={'assignment'}
-            iconColor={'brown'} />
+            iconColor={'grey'} />
 
           <TaskDetail
             title={'Diagnosis / Problem'}
             text={ taskDetails.diagnosis }
             icon={'local-hospital'}
-            iconColor={'red'} />
+            iconColor={'grey'} />
 
           <TaskDetail
             title={'Goal'}
             text={ taskDetails.goal }
             icon={'event-available'}
-            iconColor={'green'} />
+            iconColor={'grey'} />
 
           <TaskDetail
             title={'Time / Interval'}
             text={ taskDetails.time }
             icon={'schedule'}
-            iconColor={'black'} />
+            iconColor={'grey'} />
 
           <TaskAssignees
             title={'Circlers'}
             icon={'people'}
-            iconColor={'blue'} />
+            iconColor={'grey'} />
 
         </View>
 
@@ -154,27 +182,37 @@ class TaskDetailsScreen extends Component {
                   key={comment.id}
                   avatar={comment.avatar}
                   name={comment.name}
-                  date={comment.lastUpdated && comment.createdat}
+                  date={comment.lastUpdated && comment.createdAt}
                   comment={comment.body} />
               )
             })}
 
         </View>
 
-      {/* TODO: post input */}
-
       </ScrollView>
+
+      <InputToolbar
+        composerHeight={MIN_COMPOSER_HEIGHT}
+        text={this.state.commentText}
+        onTextChanged={(text) => this._onInputTextChange(text)}
+        onSend={messages => this._onSubmitComment(user.info.uid, taskId, messages.text)} />
+
+      </View>
     );
   }
 }
 
-function mapStateToProps({ task }) {
+function mapStateToProps({ user, task }) {
   return {
-    task,
+    user, task,
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingBottom: MIN_COMPOSER_HEIGHT,
+  },
   taskContainer: {
     flex: 1,
     backgroundColor: '#fff',
@@ -185,6 +223,9 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 50,
     paddingTop: 10,
+    paddingBottom: 10,
+    borderBottomColor: 'lightgrey',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   sectionTitle: {
     fontSize: 18,
@@ -207,9 +248,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderTopColor: 'black',
+    borderTopColor: 'grey',
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'black',
+    borderBottomColor: 'grey',
     borderBottomWidth: StyleSheet.hairlineWidth,
     padding: 20,
     height: 20,

@@ -5,6 +5,7 @@ import {
   REMOVE_FETCHING_TASKS,
   UPDATE_NEWTASK_TEXT,
   REMOVE_NEWTASK_TEXT,
+  SUBMIT_COMMENT,
 } from '../actions/types';
 
 const initialState = {
@@ -117,6 +118,30 @@ export default function(state = initialState, action) {
           assignee: '',
         }
       };
+    case SUBMIT_COMMENT:
+    ///TODO: hook up with API
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [action.taskId]: {
+            ...state.tasks[action.taskId],
+            comments: {
+              ...state.tasks[action.taskId].comments,
+              [1234]: {
+                id: 1234,
+                uid: String(action.uid),
+                name: "Pipi Langstrumpf",
+                avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+                createdAt: action.timestamp,
+                body: action.text,
+                lastUpdated: null,
+              }
+          }
+
+          }
+        }
+      }
     default:
       return state;
   }

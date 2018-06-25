@@ -131,7 +131,6 @@ class CareAssessmentInputScreen extends Component {
     const navAssessment = this.props.navigation.state.params.assessment;
     const assessment = this.props.patient[navAssessment.assessmentType][navAssessment.id]
     let inputSection;
-    console.log(assessment)
 
     if (navAssessment.assessmentType === 'vitals') {
       inputSection = (

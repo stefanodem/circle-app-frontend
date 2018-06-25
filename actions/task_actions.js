@@ -5,6 +5,7 @@ import {
   REMOVE_FETCHING_TASKS,
   UPDATE_NEWTASK_TEXT,
   REMOVE_NEWTASK_TEXT,
+  SUBMIT_COMMENT,
 } from './types';
 
 import {
@@ -57,5 +58,16 @@ export const updateNewTaskText = (fieldName, text) => {
 export const removeNewTaskText = () => {
   return {
     type: REMOVE_NEWTASK_TEXT,
+  }
+}
+
+//TODO: hook up with API
+export const submitComment = (uid, taskId, text) => {
+  return {
+    type: SUBMIT_COMMENT,
+    uid,
+    text,
+    taskId,
+    timestamp: Date.now(),
   }
 }

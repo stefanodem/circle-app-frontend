@@ -86,7 +86,7 @@ function fetchingUserPatientsFailure(uid, error) {
   console.warn(error);
   return {
     type: FETCHING_USER_PATIENT_FAILURE,
-    error: `Error fetching user: ${action.uid}`,
+    error: `Error fetching user: ${uid}`,
   }
 }
 

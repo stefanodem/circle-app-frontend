@@ -7,7 +7,7 @@ const options = {
 
 export default StackNavigator({
 
-    Home: { screen: CareAssessment },
+    Home: { screen: Home },
     TaskFeed: { screen: TaskFeed },
     NewTask: { screen: NewTask },
     TaskDetails: { screen: TaskDetails },

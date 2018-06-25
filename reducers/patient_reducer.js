@@ -34,7 +34,7 @@ export default function(state = initialState, action) {
       : {
         ...state,
         isFetching: false,
-        patientId: action.patient.Id,
+        patientId: action.patient.id,
         vitals: action.patient.vitals,
         symptoms: action.patient.symptoms,
         conditions: action.patient.conditions,

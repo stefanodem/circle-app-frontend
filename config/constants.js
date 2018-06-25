@@ -17,3 +17,5 @@
 // export const setting1 = 100000
 // export const setting2 = 100000
 // export const setting3 = 300000
+
+export const MIN_COMPOSER_HEIGHT = 33;

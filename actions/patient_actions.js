@@ -31,7 +31,7 @@ const fetchingPatientFailure = (patientId, error) => {
   console.warn(error);
   return {
     type: FETCHING_PATIENT_FAILURE,
-    error: `Error fetching user: ${action.patientId}`,
+    error: `Error fetching patient: ${patientId}`,
   }
 }
 

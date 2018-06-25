@@ -64,7 +64,7 @@ export default function(state = initialState, action) {
       ? {
         ...state,
         isFetching: false,
-        error: `Error while fetching patients for user id: ${action.uid}`
+        error: `Error while fetching patients for user id: ${action.uid}`,
       }
       : {
         ...state,

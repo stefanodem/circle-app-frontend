@@ -6,7 +6,7 @@ import {
   Text,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { Card, ListItem, Button } from 'react-native-elements';
+import { Card, ListItem, Button , Avatar} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Task = props => {
@@ -67,7 +67,7 @@ const Task = props => {
 
         {/* CardButtons */}
 
-        <View style={styles.buttonContainer}>
+{/*        <View style={styles.buttonContainer}>
           <Button
             //raised
             fontSize={14}
@@ -92,7 +92,34 @@ const Task = props => {
             //fontFamily='Lato'
             buttonStyle={{ height: 35, width: 110 }}
             title='Message' />
+        </View>*/}
+    <View
+      style={styles.avatarContainer} >
+{/*      <Icon
+        name={ 'medkit' }
+        style={[ styles.icon ]}
+        size={16} />*/}
+      <View
+        style={{ paddingLeft: 0 }} >
+        <View
+          style={styles.avatars} >
+          <Avatar
+            containerStyle={{ marginRight: 10 }}
+            small
+            rounded
+            source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
+            onPress={() => console.log("Works!")}
+            activeOpacity={0.7} />
+          <Avatar
+            containerStyle={{ marginRight: 10 }}
+            small
+            rounded
+            source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg"}}
+            onPress={() => console.log("Works!")}
+            activeOpacity={0.7} />
         </View>
+      </View>
+    </View>
 
       </Card>
     </TouchableWithoutFeedback>
@@ -117,6 +144,26 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     paddingRight: 15,
     paddingBottom: 10,
+  },
+  taskContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingBottom: 10,
+  },
+  avatarContainer: {
+    flexDirection: 'row',
+    //paddingLeft: 10,
+    paddingRight: 50,
+    paddingTop: 5,
+  },
+  avatars: {
+    flexDirection: 'row',
+  },
+  icon: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
+    //textAlign: 'center',
   },
 })
 

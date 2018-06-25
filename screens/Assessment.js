@@ -134,7 +134,7 @@ const BinaryChoice = ({ question, onResponseSubmit }) => {
       style={{ flex: 1, flexDirection: 'row' }} >
 
       <TouchableOpacity
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 300, backgroundColor: 'green' }}
+        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 300, backgroundColor: 'lightgrey', borderWidth: 5, borderColor: 'white' }}
         onPress={() => onResponseSubmit(question.id, firstResponse.id)} >
         <Text
           style={{ fontSize: 24, }} >
@@ -143,7 +143,7 @@ const BinaryChoice = ({ question, onResponseSubmit }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 300, backgroundColor: 'red' }}
+        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 300, backgroundColor: 'lightgrey', borderWidth: 5, borderColor: 'white' }}
         onPress={() => onResponseSubmit(question.id, secondResponse.id)} >
         <Text
           style={{ fontSize: 24 }} >

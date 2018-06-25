@@ -112,7 +112,7 @@ class CareAssessmentScreen extends Component {
           medium
           rounded
           overlayContainerStyle={item.wasEdited && {backgroundColor: 'blue'} }
-          icon={{name: 'home'}}
+          icon={{name: 'favorite', size: 20}}
           onPress={() => this.props.navigation.navigate('CareAssessmentInput', { assessment: item })}
           activeOpacity={0.7} />
         <Text

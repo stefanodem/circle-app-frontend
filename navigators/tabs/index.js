@@ -5,6 +5,7 @@ import { TabNavigator } from 'react-navigation';
 import Home from './Home';
 import Assessment from './Assessment';
 import Chat from './Chat';
+import CareAssessment from './CareAssessment';
 
 // Tabs
 import Tab from '../../components/tabs/tab'
@@ -28,9 +29,9 @@ const options = {
 export default TabNavigator({
 
     Home:       { screen: Home, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="home" />) }},
-    Groups:     { screen: Assessment, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="chat" />) }},
-    Stats:      { screen: Chat, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="show-chart" />) }},
+    Groups:     { screen: Chat, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="chat" />) }},
+    Stats:      { screen: CareAssessment, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="show-chart" />) }},
     User:       { screen: Home, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="person" />) }},
-    Admin:      { screen: Home, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="settings" />) }},
+    Admin:      { screen: Assessment, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="settings" />) }},
 
 }, options);

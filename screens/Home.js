@@ -12,7 +12,7 @@ class HomeScreen extends Component {
     const { navigate } = navigation;
     return {
       title: 'Home',
-      headerTitle: 'Home',
+      headerTitle: 'Circles',
       //TODO: connect navigation to redux and get care-receiver name
       //can be String, React Element or React Componen
       //header: can be React Element or a function --> for customizing headers
@@ -57,6 +57,7 @@ class HomeScreen extends Component {
 
   render() {
     const {isFetching, error, patients} = this.props.user;
+    //console.log(patients)
 
     if (isFetching) {
       return (
@@ -73,14 +74,22 @@ class HomeScreen extends Component {
     }
 
     return (
-      <View>
+      <ScrollView>
 
-        {this._renderPatients(
-            this._keyExtractor,
-            _values(patients),
-            this._renderPatient)}
+        <View
+          style={styles.sectionTitleContainer}>
+          <Text
+            style={styles.sectionTitleText}>{'Family'}</Text>
+        </View>
 
-      </View>
+        <View>
+          {this._renderPatients(
+              this._keyExtractor,
+              _values(patients),
+              this._renderPatient)}
+        </View>
+
+      </ScrollView>
     );
   }
 }
@@ -95,6 +104,25 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
   },
+  sectionTitleText: {
+    fontSize: 18,
+    color: 'grey',
+    fontWeight: 'bold',
+  },
+  sectionTitleContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingLeft: 10,
+    //borderTopColor: 'grey',
+    //borderTopWidth: StyleSheet.hairlineWidth,
+    //borderBottomColor: 'grey',
+    //borderBottomWidth: StyleSheet.hairlineWidth,
+    padding: 20,
+    height: 20,
+    //backgroundColor: 'lightgrey',
+  }
 });
 
 export default connect(mapStateToProps, actions)(HomeScreen);
