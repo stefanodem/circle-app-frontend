@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView, FlatList, Text, AsyncStorage, ActivityIndicator, PickerIOS } from 'react-native';
+import { StyleSheet, View, ScrollView, FlatList, Text, AsyncStorage, ActivityIndicator, PickerIOS, TouchableOpacity } from 'react-native';
 import { Avatar, Slider, Button } from 'react-native-elements';
 import _values from 'lodash/values';
 import { connect } from 'react-redux';
@@ -134,6 +134,7 @@ class CareAssessmentScreen extends Component {
     }
 
     return (
+      <View>
       <ScrollView
         style={styles.container} >
 
@@ -210,6 +211,7 @@ class CareAssessmentScreen extends Component {
         </View>
 
       </ScrollView>
+      </View>
     );
   }
 }

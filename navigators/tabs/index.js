@@ -6,6 +6,7 @@ import Home from './Home';
 import Assessment from './Assessment';
 import Chat from './Chat';
 import CareAssessment from './CareAssessment';
+import Calendar from './Calendar';
 
 // Tabs
 import Tab from '../../components/tabs/tab'
@@ -28,7 +29,7 @@ const options = {
 
 export default TabNavigator({
 
-    Home:       { screen: Home, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="home" />) }},
+    Home:       { screen: Calendar, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="home" />) }},
     Groups:     { screen: Chat, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="chat" />) }},
     Stats:      { screen: CareAssessment, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="show-chart" />) }},
     User:       { screen: Home, navigationOptions: { tabBarLabel: '', tabBarIcon: (props) => (<Tab {...props} icon="person" />) }},

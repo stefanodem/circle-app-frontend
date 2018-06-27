@@ -42,7 +42,7 @@ const Task = props => {
           </Text>
 
           <Icon
-            name={'envelope-o'}
+            name={'comment-o'}
             size={16} />
 
           <Text
