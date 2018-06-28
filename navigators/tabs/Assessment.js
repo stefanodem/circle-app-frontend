@@ -1,5 +1,5 @@
-import { StackNavigator } from 'react-navigation';
-import { Assessment } from '../../screens';
+import { StackNavigator, TabNavigator } from 'react-navigation';
+import { Assessment, CareAssessment } from '../../screens';
 
 const options = {
 
@@ -7,6 +7,19 @@ const options = {
 
 export default StackNavigator({
 
-    Assessment: { screen: Assessment },
+    Assessment: { screen: Assessment }
 
 }, options);
+
+// const tabOptions = {
+//   tabBarPosition: 'top',
+// }
+
+// export default StackNavigator({
+
+//     Assessment: { screen: TabNavigator({
+//       AssessmentOne: { screen: Assessment },
+//       AssessmentTwo: { screen: CareAssessment },
+//     }, tabOptions) },
+
+// }, options);

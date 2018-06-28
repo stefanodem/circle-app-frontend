@@ -11,8 +11,8 @@ class TaskFeedScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
-      title: 'Task Feed',
-      headerTitle: 'Tasks',
+      title: 'Tasks',
+      headerTitle: 'Care Visit',
       //TODO: connect navigation to redux and get care-receiver name
       //can be String, React Element or React Componen
       //header: can be React Element or a function --> for customizing headers

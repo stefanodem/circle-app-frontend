@@ -7,7 +7,7 @@ import _values from 'lodash/values';
 
 import { Task, NewTaskButton } from '../components';
 
-class HomeScreen extends Component {
+class PatientsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
@@ -125,4 +125,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps, actions)(HomeScreen);
+export default connect(mapStateToProps, actions)(PatientsScreen);

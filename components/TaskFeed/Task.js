@@ -20,9 +20,10 @@ const Task = props => {
     <TouchableWithoutFeedback
       onPress={ () => navigate('TaskDetails', {taskId}) } >
 
-      <Card>
+      <Card
+        containerStyle={styles.cardContainer} >
 
-        <Text style={{ marginBottom: 30 }}>
+        <Text style={{ marginBottom: 30 }} >
           {taskTitle}
         </Text>
 
@@ -127,6 +128,12 @@ const Task = props => {
 }
 
 const styles = StyleSheet.create({
+  cardContainer: {
+    shadowColor: 'rgba(0,0,0, .2)',
+    shadowOffset: { height: 2, width: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
+  },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',

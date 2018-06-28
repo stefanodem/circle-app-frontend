@@ -1,4 +1,4 @@
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import { CareAssessment, CareAssessmentInput } from '../../screens';
 
 const options = {

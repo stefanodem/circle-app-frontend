@@ -46,6 +46,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, AsyncStorage, FlatList, TouchableWithoutFeedback, ActivityIndicator, Animated } from 'react-native';
 import { Avatar, Card } from 'react-native-elements';
 import { CalendarList, Agenda } from 'react-native-calendars';
+import { AddButton } from '../components';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
@@ -61,7 +62,7 @@ const CalendarItem = (props) => {
   return (
     <TouchableWithoutFeedback
       //onPress={ () => navigate('TaskDetails', {taskId}) } >
-      onPress={ () => navigate('TaskFeed') } >
+      onPress={ () => navigate('PatientCare') } >
 
       <Card>
         <View
@@ -138,6 +139,7 @@ class CalendarScreen extends Component {
   }
 
   renderItem(item) {
+    console.log(this.props.navigation)
     return (
       <CalendarItem
         name='Pipi Langstrumpf'
@@ -171,27 +173,31 @@ class CalendarScreen extends Component {
   render() {
     console.log(Object.keys(this.state.items).length)
     return (
-      <Agenda
-        items={this.state.items}
-        loadItemsForMonth={(month) => this.loadItems(month)}
-        selected={'2017-05-16'}
-        renderItem={this.renderItem.bind(this)}
-        renderEmptyDate={this.renderEmptyDate.bind(this)}
-        rowHasChanged={this.rowHasChanged.bind(this)}
-        // markingType={'period'}
-        // markedDates={{
-        //    '2017-05-08': {textColor: '#666'},
-        //    '2017-05-09': {textColor: '#666'},
-        //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
-        //    '2017-05-21': {startingDay: true, color: 'blue'},
-        //    '2017-05-22': {endingDay: true, color: 'gray'},
-        //    '2017-05-24': {startingDay: true, color: 'gray'},
-        //    '2017-05-25': {color: 'gray'},
-        //    '2017-05-26': {endingDay: true, color: 'gray'}}}
-         // monthFormat={'yyyy'}
-         // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
-        //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
-      />
+      <View
+        style={{flex: 1}}>
+        <Agenda
+          items={this.state.items}
+          loadItemsForMonth={(month) => this.loadItems(month)}
+          selected={'2017-05-16'}
+          renderItem={this.renderItem.bind(this)}
+          renderEmptyDate={this.renderEmptyDate.bind(this)}
+          rowHasChanged={this.rowHasChanged.bind(this)}
+          // markingType={'period'}
+          // markedDates={{
+          //    '2017-05-08': {textColor: '#666'},
+          //    '2017-05-09': {textColor: '#666'},
+          //    '2017-05-14': {startingDay: true, endingDay: true, color: 'blue'},
+          //    '2017-05-21': {startingDay: true, color: 'blue'},
+          //    '2017-05-22': {endingDay: true, color: 'gray'},
+          //    '2017-05-24': {startingDay: true, color: 'gray'},
+          //    '2017-05-25': {color: 'gray'},
+          //    '2017-05-26': {endingDay: true, color: 'gray'}}}
+           // monthFormat={'yyyy'}
+           // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
+          //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
+        />
+        <AddButton />
+      </View>
     );
   }
 }

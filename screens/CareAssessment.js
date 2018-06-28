@@ -91,7 +91,7 @@ class CareAssessmentScreen extends Component {
     const { navigate } = navigation;
     return {
       title: 'Care Assessment',
-      headerTitle: 'Care Assessment',
+      headerTitle: 'Care Visit',
     };
   }
 
@@ -134,7 +134,6 @@ class CareAssessmentScreen extends Component {
     }
 
     return (
-      <View>
       <ScrollView
         style={styles.container} >
 
@@ -211,7 +210,6 @@ class CareAssessmentScreen extends Component {
         </View>
 
       </ScrollView>
-      </View>
     );
   }
 }
