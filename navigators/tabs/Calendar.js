@@ -15,6 +15,7 @@ const tabOptions = {
     height: 60,
     showLabel: true,
     showIcon: false,
+    pressOpacity: 1,
     style: {
       backgroundColor: '#fff',
     },
@@ -47,14 +48,3 @@ export default StackNavigator({
     CareAssessmentInput: { screen: CareAssessmentInput },
 
 }, stackOptions);
-
-// export default StackNavigator({
-
-//     Calendar: { screen: Calendar },
-//     TaskFeed: { screen: TaskFeed },
-//     NewTask: { screen: NewTask },
-//     TaskDetails: { screen: TaskDetails },
-//     CareAssessment: { screen: CareAssessment },
-//     CareAssessmentInput: { screen: CareAssessmentInput },
-
-// }, stackOptions);

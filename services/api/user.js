@@ -4,7 +4,7 @@ import { normalize } from 'normalizr';
 import { postListSchema, replyListSchema } from '../../store/schema';
 
 //TODO: delete:
-import { patients } from '../../testData/testData';
+import { patients, inbox } from '../../testData/testData';
 
 // export const fetchUserPosts = async (uid, circleId) => {
 //   try {
@@ -20,4 +20,12 @@ import { patients } from '../../testData/testData';
 //TODO: Hook up to backend
 export const fetchPatients = () => {
   return new Promise(resolve => setTimeout(() => resolve(patients), 100));
+}
+
+export const fetchInbox = () => {
+  return new Promise(resolve => setTimeout(() => resolve(inbox), 100));
+}
+
+export const sendMessage = (uid, chatId, message) => {
+  return new Promise(resolve => setTimeout(() => resolve(message[0]), 100));
 }

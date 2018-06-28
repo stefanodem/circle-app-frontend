@@ -1,3 +1,73 @@
+export const inbox = {
+  1: {
+    id: 1,
+    title: 'The Super Caregivers',
+    avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUra_nQDhRnnGmrd7ct_scoU8b7YHrF7mr9Js1mMrFhLQ1U1c2UA',
+    createdAt: 1511854675244,
+    lastUpdated: 1511854675244,
+    users: {
+      1: {
+        _id: 1,
+        name: 'Fridolin Falaffel',
+        avatar: 'https://placeimg.com/140/140/any',
+      },
+      2: {
+        _id: 2,
+        name: 'Pipi Langstrumpf',
+        avatar: 'https://i.pinimg.com/originals/da/2d/60/da2d6060b247a25db67c36e888cf3bc9.jpg',
+      },
+    },
+    messages: [
+      {
+        _id: 1,
+        text: 'Hello caregiver',
+        createdAt: 1511854675244,
+        user: {
+          _id: 3,
+          name: 'Pipi Langstrumpf',
+          avatar: 'https://i.pinimg.com/originals/da/2d/60/da2d6060b247a25db67c36e888cf3bc9.jpg',
+        },
+      },
+      {
+        _id: 2,
+        text: 'What\'s up',
+        createdAt: 1511854675244,
+        user: {
+          _id: 2,
+          name: 'Fridolin Falaffel',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
+      },
+    ],
+  },
+  2: {
+    id: 2,
+    title: null,
+    avatar: 'https://placeimg.com/140/140/any',
+    createdAt: 1511854675244,
+    lastUpdated: 1511854675244,
+    users: {
+      1: {
+        _id: 1,
+        name: 'Fridolin Falaffel',
+        avatar: 'https://placeimg.com/140/140/any',
+      },
+    },
+    messages: [
+      {
+        _id: 3,
+        text: 'Pipi is a total bitch',
+        createdAt: 1511854675244,
+        user: {
+          _id: 2,
+          name: 'Fridolin Falaffel',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
+      },
+    ],
+  },
+}
+
 export const patients = {
   1: {
     id: 1,

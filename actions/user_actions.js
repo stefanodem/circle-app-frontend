@@ -9,10 +9,17 @@ import {
   FETCHING_USER_PATIENT_SUCCESS,
   FETCHING_USER_PATIENT_FAILURE,
   REMOVE_FETCHING_USER_PATIENT,
+  FETCHING_USER_INBOX,
+  FETCHING_USER_INBOX_SUCCESS,
+  FETCHING_USER_INBOX_FAILURE,
+  REMOVE_FETCHING_USER_INBOX,
+  POSTING_MESSAGE,
+  POSTING_MESSAGE_SUCCESS,
+  POSTING_MESSAGE_FAILURE,
 } from './types';
 
 import {
-  fetchPatients,
+  fetchPatients, fetchInbox, sendMessage,
 } from '../services/api/user';
 
 // export function authUser (uid) {
@@ -86,7 +93,7 @@ function fetchingUserPatientsFailure(uid, error) {
   console.warn(error);
   return {
     type: FETCHING_USER_PATIENT_FAILURE,
-    error: `Error fetching user: ${uid}`,
+    error: `Error fetching user\'s patients: ${uid}`,
   }
 }
 
@@ -105,4 +112,76 @@ export function fetchAndHandleUserPatients(uid) {
       .catch((error) => dispatch(fetchingUserPatientsFailure(uid, error)))
   }
 }
+
+function fetchingUserInbox() {
+  return {
+    type: FETCHING_USER_INBOX,
+  }
+}
+
+function fetchingUserInboxSuccess(uid, inbox, timestamp) {
+  return {
+    type: FETCHING_USER_INBOX_SUCCESS,
+    uid,
+    inbox,
+    timestamp,
+  }
+}
+
+function fetchingUserInboxFailure(uid, error) {
+  console.warn(error);
+  return {
+    type: FETCHING_USER_INBOX_FAILURE,
+    error: `Error fetching user\'s inbox: ${uid}`,
+  }
+}
+
+export function removeFetchingUserInbox() {
+  return {
+    type: REMOVE_FETCHING_USER_INBOX,
+  }
+}
+
+export function fetchAndHandleUserInbox(uid) {
+  return function (dispatch) {
+    dispatch(fetchingUserInbox())
+
+    return fetchInbox(uid)
+      .then((inbox) => dispatch(fetchingUserInboxSuccess(uid, inbox, Date.now())))
+      .catch((error) => dispatch(fetchingUserInboxFailure(uid, error)))
+  }
+}
+
+function postingMessage() {
+  return {
+    type: POSTING_MESSAGE,
+  }
+}
+
+function postingMessageSuccess(chatId, message, timestamp) {
+  return {
+    type: POSTING_MESSAGE_SUCCESS,
+    chatId,
+    message,
+  }
+}
+
+function postingMessageFailure(chatId, error) {
+  console.warn(error);
+  return {
+    type: POSTING_MESSAGE_FAILURE,
+    error: `Error posting message: ${chatId}`,
+  }
+}
+
+export function sendingMessage(uid, chatId, message) {
+  return function (dispatch) {
+    dispatch(postingMessage())
+
+    return sendMessage(uid, chatId, message)
+      .then((message) => dispatch(postingMessageSuccess(chatId, message, Date.now())))
+      .catch((error) => dispatch(postingMessageFailure(uid, error)))
+  }
+}
+
 

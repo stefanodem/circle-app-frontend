@@ -111,7 +111,6 @@ class CalendarScreen extends Component {
   }
 
   loadItems(day) {
-    console.log(day)
     setTimeout(() => {
       for (let i = -5; i < 50; i++) {
         // per i generate one more day
@@ -128,18 +127,15 @@ class CalendarScreen extends Component {
           }
         }
       }
-      //console.log(this.state.items);
       const newItems = {};
       Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
       this.setState({
         items: newItems
       });
     }, 1000);
-    // console.log(`Load Items for ${day.year}-${day.month}`);
   }
 
   renderItem(item) {
-    console.log(this.props.navigation)
     return (
       <CalendarItem
         name='Pipi Langstrumpf'
@@ -171,7 +167,6 @@ class CalendarScreen extends Component {
   }
 
   render() {
-    console.log(Object.keys(this.state.items).length)
     return (
       <View
         style={{flex: 1}}>
