@@ -3,6 +3,7 @@ export NewTask from './NewTask';
 export TaskDetails from './TaskDetails';
 export Assessment from './Assessment';
 export Patients from './Patients';
+export PatientProfile from './PatientProfile';
 export Inbox from './Inbox';
 export Chat from './Chat';
 export CareAssessment from './CareAssessment';

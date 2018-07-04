@@ -13,7 +13,7 @@ class ButtonBack extends Component {
 
         return (
             <TouchableOpacity
-                style={{ left: 10 }}
+                style={{ left: 5 }}
                 onPress={ () => onPress() } >
 
                 <Icon
@@ -26,7 +26,7 @@ class ButtonBack extends Component {
 }
 
 const styles = StyleSheet.create({
-    icon: { fontSize: 30 }
+    icon: { fontSize: 45 }
 })
 
 export default ButtonBack;

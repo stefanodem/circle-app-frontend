@@ -7,12 +7,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const AddButton = props => {
   const {
-
+    onPress,
   } = props;
 
   return (
     <TouchableOpacity
       style={styles.buttonContainer}
+      onPress={onPress}
       activeOpacity={0.7}>
       <Icon
         style={styles.icon}

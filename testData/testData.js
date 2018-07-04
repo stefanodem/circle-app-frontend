@@ -68,10 +68,111 @@ export const inbox = {
   },
 }
 
+//TODO: Align with FHIR
 export const patients = {
   1: {
+    resourceType: "Patient",
     id: 1,
-    name: 'Föve',
+    name: 'Föve Miggeli',
+    firstName: 'Föve',
+    lastName: 'Miggeli',
+    active: true,
+    telecom: [
+      {
+        system: 'phone', //phone, fax, email, pager, url, sms, other
+        value: '0789340775', //home | work | temp | old | mobile
+        use: 'home',
+        rank: 1,
+        period: {
+          start: 1511854675244,
+          end: 1511854675245,
+        },
+      }
+    ],
+    gender: 'male',
+    deceasedBoolean: false,
+    deceasedDateTime: null,
+    telecom: [
+      {
+        system: "phone",
+        value: "0444800850",
+        use: "mobile"
+      },
+      {
+        system: "email",
+        value: "f.demicheli@gmail.com",
+        use: "home"
+      }
+    ],
+    address: [
+      {
+        use: 'home',
+        line: [
+          "Abendweg 5"
+        ],
+        city: 'Zurich',
+        district: '',
+        state: 'Zurich',
+        postalCode: '8038',
+        country: 'CHE',
+      }
+    ],
+    maritalStatus: {
+      coding: [
+        {
+          system: "http://hl7.org/fhir/v3/MaritalStatus",
+          code: "M",
+          display: "Married"
+        }
+      ],
+      text: "Married"
+    },
+    contact: [
+      {
+        relationship: [
+          {
+            coding: [
+              {
+                system: "http://hl7.org/fhir/v2/0131",
+                code: "C"
+              }
+            ]
+          }
+        ],
+        name: {
+          use: "usual",
+          family: "Demicheli",
+          given: [
+            "Arunee"
+          ]
+        },
+        telecom: [
+          {
+            system: "phone",
+            value: "0690383372",
+            use: "mobile"
+          }
+        ]
+      }
+    ],
+    communication: [
+      {
+        language: {
+          coding: [
+            {
+              system: "urn:ietf:bcp:47",
+              code: "de",
+              display: "German"
+            }
+          ],
+          text: "Switzerland"
+        },
+        preferred: true
+      }
+    ],
+    birthdate: '1932-09-24',
+    height: '',
+    weight:'',
     avatar: 'https://vignette.wikia.nocookie.net/super-villain/images/9/91/3998596-dr-evil.jpg/revision/latest?cb=20140805055410',
     nextVisit: 1511854675244,
     createdAt: 1511854675244,

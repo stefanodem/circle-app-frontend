@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, AsyncStorage, FlatList, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
+import { AddButton } from '../components';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
@@ -13,15 +14,6 @@ class PatientsScreen extends Component {
     return {
       title: 'Home',
       headerTitle: 'Circles',
-      //TODO: connect navigation to redux and get care-receiver name
-      //can be String, React Element or React Componen
-      //header: can be React Element or a function --> for customizing headers
-      headerRight: (
-        <NewTaskButton
-          color="black"
-          navigate={navigate}
-          to="NewTask" />
-      ),
     };
   }
 
@@ -35,7 +27,7 @@ class PatientsScreen extends Component {
     return (
       <ListItem
         key={item.id}
-        onPress={() => navigate('TaskFeed', {patientId: item.id})}
+        onPress={() => navigate('PatientProfile', {patientId: item.id, patientName: item.name})}
         containerStyle={styles.container}
         roundAvatar
         avatar={{uri: item.avatar}}
@@ -57,6 +49,7 @@ class PatientsScreen extends Component {
 
   render() {
     const {isFetching, error, patients} = this.props.user;
+    const { navigate } = this.props.navigation;
     //console.log(patients)
 
     if (isFetching) {
@@ -74,22 +67,29 @@ class PatientsScreen extends Component {
     }
 
     return (
-      <ScrollView>
+      <View
+        style={{flex: 1}}>
+        <ScrollView>
 
-        <View
-          style={styles.sectionTitleContainer}>
-          <Text
-            style={styles.sectionTitleText}>{'Family'}</Text>
-        </View>
+          <View
+            style={styles.sectionTitleContainer}>
+            <Text
+              style={styles.sectionTitleText}>{'Family'}</Text>
+          </View>
 
-        <View>
-          {this._renderPatients(
-              this._keyExtractor,
-              _values(patients),
-              this._renderPatient)}
-        </View>
+          <View>
+            {this._renderPatients(
+                this._keyExtractor,
+                _values(patients),
+                this._renderPatient)}
+          </View>
 
-      </ScrollView>
+        </ScrollView>
+
+        <AddButton
+          onPress={() => console.log('Pressed Add Button')} />
+
+      </View>
     );
   }
 }
