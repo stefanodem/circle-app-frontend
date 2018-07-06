@@ -1,3 +1,114 @@
+export const addPatientForm = {
+  personalInfo: {
+    title: 'Patient Information',
+    sectionType: 'personalInfo',
+    description: null,
+    input: [
+      {
+        id: 1,
+        value: null,
+        type: 'text',
+        options: null,
+        label: 'First Name',
+        placeholder: 'Please type the patient\'s first name...',
+        errorMessage: 'Please provide a valid first name',
+      },
+      {
+        id: 2,
+        value: null,
+        type: 'text',
+        options: null,
+        label: 'Last Name',
+        placeholder: 'Please type patient\'s last name...',
+        errorMessage: 'Please provide a valid last name',
+      },
+      {
+        id: 3,
+        value: null,
+        label: 'Birthdate',
+        type: 'text',
+        options: null,
+        placeholder: 'Please type patient\'s birthdate...',
+        errorMessage: 'Please provide a valid birthdate',
+      },
+      {
+        id: 4,
+        value: null,
+        label: 'Gender',
+        type: 'multiOption',
+        options: [
+          {id: 1, name: 'Male'},
+          {id: 2, name: 'Female'},
+        ],
+        placeholder: 'Please provide a gender...',
+        errorMessage: 'Please provide a valid input',
+      },
+      {
+        id: 5,
+        value: null,
+        label: 'Marital Status',
+        type: 'multiOption',
+        options: [
+          {id: 1, name: 'Never married'},
+          {id: 2, name: 'Married'},
+          {id: 3, name: 'Widowed'},
+          {id: 4, name: 'Separated'},
+          {id: 5, name: 'Divorced'},
+          {id: 6, name: 'Other'},
+        ],
+        placeholder: 'Please provide a marital status...',
+        errorMessage: 'Please provide a valid input',
+      },
+      {
+        id: 6,
+        value: null,
+        label: 'Race/Ethnicity',
+        type: 'multiOption',
+        options: [
+          {id: 1, name: 'Caucasian'},
+          {id: 2, name: 'Asian'},
+          {id: 3, name: 'Black'},
+          {id: 4, name: 'Hispanic'},
+        ],
+        placeholder: 'Please provide race/ethnicity...',
+        errorMessage: 'Please provide a valid input',
+      },
+      {
+        id: 7,
+        value: null,
+        label: 'Primary Language',
+        type: 'multiOption',
+        options: [
+          {id: 1, name: 'English'},
+          {id: 2, name: 'Spanish'},
+          {id: 3, name: 'French'},
+          {id: 4, name: 'Other'},
+        ],
+        placeholder: 'Please provide a language...',
+        errorMessage: 'Please provide a valid input',
+      },
+      {
+        id: 8,
+        value: null,
+        label: 'Education',
+        type: 'multiOption',
+        options: [
+          {id: 1, name: 'No schooling'},
+          {id: 2, name: '8th grade/less'},
+          {id: 3, name: '9-11 grades'},
+          {id: 4, name: 'High school'},
+          {id: 5, name: 'Technical or trade school'},
+          {id: 6, name: 'Some college'},
+          {id: 7, name: 'Bachelor\'s degree'},
+          {id: 8, name: 'Graduate degree'},
+        ],
+        placeholder: 'Please provide an education...',
+        errorMessage: 'Please provide a valid input',
+      },
+    ],
+  },
+}
+
 export const inbox = {
   1: {
     id: 1,
@@ -110,9 +221,9 @@ export const patients = {
         line: [
           "Abendweg 5"
         ],
-        city: 'Zurich',
+        city: 'Zürich',
         district: '',
-        state: 'Zurich',
+        state: 'Zürich',
         postalCode: '8038',
         country: 'CHE',
       }
@@ -173,6 +284,20 @@ export const patients = {
     birthdate: '1932-09-24',
     height: '',
     weight:'',
+    metrics: [
+      {
+        name: 'Visits',
+        value: 25,
+      },
+      {
+        name: 'Weight',
+        value: '63 kg',
+      },
+      {
+        name: 'Avg. Steps',
+        value: '3000',
+      },
+    ],
     avatar: 'https://vignette.wikia.nocookie.net/super-villain/images/9/91/3998596-dr-evil.jpg/revision/latest?cb=20140805055410',
     nextVisit: 1511854675244,
     createdAt: 1511854675244,
@@ -186,8 +311,122 @@ export const patients = {
     },
   },
   2: {
+    resourceType: "Patient",
     id: 2,
-    name: 'Hedi',
+    name: 'Hedi Miggeli',
+    firstName: 'Hedi',
+    lastName: 'Miggeli',
+    active: true,
+    telecom: [
+      {
+        system: 'phone', //phone, fax, email, pager, url, sms, other
+        value: '0789340775', //home | work | temp | old | mobile
+        use: 'home',
+        rank: 1,
+        period: {
+          start: 1511854675244,
+          end: 1511854675245,
+        },
+      }
+    ],
+    gender: 'male',
+    deceasedBoolean: false,
+    deceasedDateTime: null,
+    telecom: [
+      {
+        system: "phone",
+        value: "0444800850",
+        use: "mobile"
+      },
+      {
+        system: "email",
+        value: "f.demicheli@gmail.com",
+        use: "home"
+      }
+    ],
+    address: [
+      {
+        use: 'home',
+        line: [
+          "Abendweg 5"
+        ],
+        city: 'Zürich',
+        district: '',
+        state: 'Zürich',
+        postalCode: '8038',
+        country: 'CHE',
+      }
+    ],
+    maritalStatus: {
+      coding: [
+        {
+          system: "http://hl7.org/fhir/v3/MaritalStatus",
+          code: "M",
+          display: "Married"
+        }
+      ],
+      text: "Married"
+    },
+    contact: [
+      {
+        relationship: [
+          {
+            coding: [
+              {
+                system: "http://hl7.org/fhir/v2/0131",
+                code: "C"
+              }
+            ]
+          }
+        ],
+        name: {
+          use: "usual",
+          family: "Demicheli",
+          given: [
+            "Arunee"
+          ]
+        },
+        telecom: [
+          {
+            system: "phone",
+            value: "0690383372",
+            use: "mobile"
+          }
+        ]
+      }
+    ],
+    communication: [
+      {
+        language: {
+          coding: [
+            {
+              system: "urn:ietf:bcp:47",
+              code: "de",
+              display: "German"
+            }
+          ],
+          text: "Switzerland"
+        },
+        preferred: true
+      }
+    ],
+    birthdate: '1932-09-24',
+    height: '',
+    weight:'',
+    metrics: [
+      {
+        name: 'Visits',
+        value: 25,
+      },
+      {
+        name: 'Weight',
+        value: '63 kg',
+      },
+      {
+        name: 'Avg. Steps',
+        value: '3000',
+      },
+    ],
     avatar: 'https://vignette.wikia.nocookie.net/super-villain/images/9/91/3998596-dr-evil.jpg/revision/latest?cb=20140805055410',
     nextVisit: 1511854675244,
     createdAt: 1511854675244,

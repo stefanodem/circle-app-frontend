@@ -1,2 +1,4 @@
-export * from './TaskFeed';
-export * from './Navigation';
+export * from './tasks';
+export * from './navigation';
+export * from './general';
+export * from './patients';

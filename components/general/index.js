@@ -1,0 +1,1 @@
+export SectionDescription from './SectionDescription';

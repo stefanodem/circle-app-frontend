@@ -6,6 +6,8 @@ import {
   UPDATE_CONDITION_INPUT,
   UPDATE_ASSESSMENT_INPUT,
   TOGGLE_BADGE,
+  FETCHING_ADD_PATIENT_FORM_SUCCESS,
+  UPDATE_ADD_PATIENT_FORM_VALUE,
 } from '../actions/types';
 
 const initialState = {
@@ -15,6 +17,9 @@ const initialState = {
   vitals: null,
   symptoms: null,
   conditions: null,
+  add: {
+    personalInfo: null,
+  },
 }
 
 export default function(state = initialState, action) {
@@ -112,7 +117,32 @@ export default function(state = initialState, action) {
         return {
           ...state,
         }
-      }
+      };
+    case FETCHING_ADD_PATIENT_FORM_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        add: {
+          ...state.add,
+          personalInfo: action.addPatientForm.personalInfo,
+        }
+      };
+    case UPDATE_ADD_PATIENT_FORM_VALUE:
+      return {
+        ...state,
+        add: {
+          ...state.add,
+          [action.sectionType]: {
+            ...state.add[action.sectionType],
+            input: state.add[action.sectionType].input.map(input => {
+              if (input.id === action.inputId) {
+                input.value = action.value;
+              }
+              return input;
+            })
+          },
+        }
+      };
     default:
       return state;
   }

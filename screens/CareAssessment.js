@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, FlatList, Text, AsyncStorage, ActivityIndicator, PickerIOS, TouchableOpacity } from 'react-native';
 import { Avatar, Slider, Button } from 'react-native-elements';
+import { SectionDescription } from '../components';
 import _values from 'lodash/values';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -17,27 +18,6 @@ const getThumbTintColor = (value) => {
   } else if (value === 5) {
     return 'green';
   }
-}
-
-const SectionDescription = props => {
-  const {
-    title,
-    description,
-  } = props;
-
-  return (
-    <View
-      style={styles.section} >
-      <Text
-        style={styles.sectionTitle} >
-        {title}
-      </Text>
-      <Text
-        style={styles.sectionDescription} >
-        {description}
-      </Text>
-    </View>
-  )
 }
 
 const SliderSection = props => {

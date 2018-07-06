@@ -8,7 +8,7 @@ import _values from 'lodash/values';
 import { Task, NewTaskButton } from '../components';
 
 const profileTextColor = 'white';
-const profileBackgroundColor = '#304FFE'; //#3949AB, #304FFE, #ff1654
+const profileBackgroundColor = '#ff1654'; //#3949AB, #304FFE, #ff1654
 
 class PatientProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -40,7 +40,7 @@ class PatientProfileScreen extends Component {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text>{error}</Text>
         </View>
-      )
+      );
     }
 
     return (
@@ -57,9 +57,9 @@ class PatientProfileScreen extends Component {
             <Avatar
               large
               rounded
-              source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
-              onPress={() => console.log("Works!")}
-              activeOpacity={0.7} />
+              source={{uri: patient.avatar }}
+              //onPress={() => console.log("Works!")}
+              activeOpacity={1} />
             <Text
               style={styles.profileTitle}>{patient.name}</Text>
             <Text
@@ -67,28 +67,21 @@ class PatientProfileScreen extends Component {
           </View>
           {/*ProfileMetrics*/}
           <View
-            style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-            <View
-              style={styles.profileMetricsContainer}>
-              <Text
-                style={styles.profileMetricsTitle}>{'Visits'}</Text>
-              <Text
-                style={styles.profileMetrics}>{'25'}</Text>
-            </View>
-            <View
-              style={styles.profileMetricsContainer}>
-              <Text
-                style={styles.profileMetricsTitle}>{'Visits'}</Text>
-              <Text
-                style={styles.profileMetrics}>{'25'}</Text>
-            </View>
-            <View
-              style={styles.profileMetricsContainer}>
-              <Text
-                style={styles.profileMetricsTitle}>{'Visits'}</Text>
-              <Text
-                style={styles.profileMetrics}>{'25'}</Text>
-            </View>
+            style={styles.profileMetricsContainer}>
+
+            {patient.metrics && patient.metrics.map((metric, i) => {
+              return (
+                <View
+                  key={i}
+                  style={styles.profileMetricContainer}>
+                  <Text
+                    style={styles.profileMetricsTitle}>{metric.name}</Text>
+                  <Text
+                    style={styles.profileMetrics}>{metric.value}</Text>
+                </View>
+              );
+            })}
+
           </View>
         </View>
         <View
@@ -96,24 +89,25 @@ class PatientProfileScreen extends Component {
           <ScrollView>
             <ListItem
               roundAvatar
-              title={'Description'}
-              //subtitle={item.messages[0].text}
-              />
+              title={'Description'} />
             <ListItem
               roundAvatar
-              title={'Diagnosis'}
-              //subtitle={item.messages[0].text}
-              />
+              title={'Diagnosis'} />
             <ListItem
               roundAvatar
-              title={'Treatment'}
-              //subtitle={item.messages[0].text}
-              />
+              title={'Care Plan'} />
             <ListItem
               roundAvatar
-              title={'Circlers'}
-              //subtitle={item.messages[0].text}
-              />
+              title={'Assessments'} />
+            <ListItem
+              roundAvatar
+              title={'Progress'} />
+            <ListItem
+              roundAvatar
+              title={'Circlers'} />
+            <ListItem
+              roundAvatar
+              title={'Contacts'} />
           </ScrollView>
         </View>
       </View>
@@ -146,11 +140,17 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   profileSubtitle: {
-    fontSize: 12,
+    fontSize: 14,
     color: profileTextColor,
     paddingBottom: 3,
   },
   profileMetricsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profileMetricContainer: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',

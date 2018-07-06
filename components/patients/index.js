@@ -1,0 +1,1 @@
+export PatientInputItem from './PatientInputItem';

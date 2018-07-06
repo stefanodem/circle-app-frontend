@@ -177,9 +177,15 @@ const MultipleChoice = ({ question, multipleChoice, style, onResponseCheck, onRe
             containerStyle={style.container}
             textStyle={style.text}
             title={response.title}
-            checkedIcon='dot-circle-o'
-            checkedColor='blue'
-            uncheckedIcon='circle-o'
+            checkedIcon={multipleChoice
+                          ? 'dot-circle-o'
+                          : null}
+            checkedColor={multipleChoice
+                          ? 'blue'
+                          : null}
+            uncheckedIcon={multipleChoice
+                          ? 'circle-o'
+                          : null}
             checked={response.checked} />
         ))}
 

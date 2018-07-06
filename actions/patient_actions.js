@@ -6,10 +6,12 @@ import {
   UPDATE_CONDITION_INPUT,
   UPDATE_ASSESSMENT_INPUT,
   TOGGLE_BADGE,
+  FETCHING_ADD_PATIENT_FORM_SUCCESS,
+  UPDATE_ADD_PATIENT_FORM_VALUE,
 } from './types';
 
 import {
-  fetchPatient,
+  fetchPatient, fetchAddPatientForm,
 } from '../services/api/patient';
 
 const fetchingPatient = () => {
@@ -27,11 +29,11 @@ const fetchingPatientSuccess = (patientId, patient, timestamp) => {
   }
 }
 
-const fetchingPatientFailure = (patientId, error) => {
+const fetchingPatientFailure = (message, error) => {
   console.warn(error);
   return {
     type: FETCHING_PATIENT_FAILURE,
-    error: `Error fetching patient: ${patientId}`,
+    error: `Error fetching ${message}`,
   }
 }
 
@@ -47,7 +49,7 @@ export const fetchAndHandlePatient = (patientId) => {
 
     return fetchPatient(patientId)
       .then((patient) => dispatch(fetchingPatientSuccess(patientId, patient, Date.now())))
-      .catch((error) => dispatch(fetchingPatientFailure(patientId, error)))
+      .catch((error) => dispatch(fetchingPatientFailure(`patientId: ${patientId}`, error)))
   }
 }
 
@@ -74,5 +76,31 @@ export const toggleBadge = (badgeId, assessmentId, assessmentType) => {
     assessmentType,
     assessmentId,
     badgeId,
+  }
+}
+
+const fetchingAddPatientFormSuccess = (addPatientForm) => {
+  return {
+    type: FETCHING_ADD_PATIENT_FORM_SUCCESS,
+    addPatientForm,
+  }
+}
+
+export const fetchingAddPatientForm = (uid) => {
+  return dispatch => {
+    dispatch(fetchingPatient())
+
+    return fetchAddPatientForm(uid)
+      .then(addPatientForm => dispatch(fetchingAddPatientFormSuccess(addPatientForm)))
+      .catch(error => dispatch(fetchingPatientFailure(`addPatientForm for user ${uid}`, error)))
+  }
+}
+
+export const updateAddPatientFormValue = (sectionType, inputId, value) => {
+  return {
+    type: UPDATE_ADD_PATIENT_FORM_VALUE,
+    sectionType,
+    inputId,
+    value,
   }
 }

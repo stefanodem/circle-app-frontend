@@ -87,7 +87,7 @@ class PatientsScreen extends Component {
         </ScrollView>
 
         <AddButton
-          onPress={() => console.log('Pressed Add Button')} />
+          onPress={() => navigate('PersonalInformation')} />
 
       </View>
     );

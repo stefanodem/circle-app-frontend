@@ -19,7 +19,7 @@ class NewTaskScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.removeNewTaskText();
+    this.props.fetchPersonalInformationForm();
   }
 
   render() {
@@ -27,7 +27,8 @@ class NewTaskScreen extends Component {
     const updateNewTaskText = this.props.updateNewTaskText;
 
     return (
-      <View>
+      <View
+        style={styles.container}>
 
         <View>
           <FormLabel>Name</FormLabel>
@@ -87,6 +88,10 @@ function mapStateToProps({ task }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  }
 });
 
 export default connect(mapStateToProps, actions)(NewTaskScreen);
