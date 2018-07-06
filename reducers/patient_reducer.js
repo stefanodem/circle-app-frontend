@@ -19,6 +19,7 @@ const initialState = {
   conditions: null,
   add: {
     personalInfo: null,
+    referralItems: null,
   },
 }
 
@@ -125,6 +126,7 @@ export default function(state = initialState, action) {
         add: {
           ...state.add,
           personalInfo: action.addPatientForm.personalInfo,
+          referralItems: action.addPatientForm.referralItems,
         }
       };
     case UPDATE_ADD_PATIENT_FORM_VALUE:

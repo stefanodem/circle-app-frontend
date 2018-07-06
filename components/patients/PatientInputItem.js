@@ -14,8 +14,6 @@ import {
 } from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 
-
-
 const PickerItem = props => {
   const {
     id,

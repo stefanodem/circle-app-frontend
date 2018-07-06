@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView, Text, Image, AsyncStorage, FlatList, TouchableWithoutFeedback, TouchableOpacity, ActivityIndicator, Modal, Dimensions, Picker } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements';
-import { SectionDescription, PatientInputItem, NextButton, InputModal } from 'app/components';
+import { SectionDescription, PatientInputItem, InputModal } from 'app/components';
 import { connect } from 'react-redux';
 import * as actions from 'app/actions';
 import _values from 'lodash/values';
 
-class PersonalInformationScreen extends Component {
+class ReferralItemsScreen extends Component {
   state = {
     modal: {
       id: null,
@@ -17,8 +24,8 @@ class PersonalInformationScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
-      title: 'PersonalInformation',
-      headerTitle: 'Personal Information',
+      title: 'ReferralItems',
+      headerTitle: 'Referral Items',
       tabBarVisible: false,
     }
   }
@@ -38,7 +45,7 @@ class PersonalInformationScreen extends Component {
         label={item.label}
         placeholder={item.placeholder}
         value={item.value}
-        sectionType={add.personalInfo.sectionType}
+        sectionType={add.referralItems.sectionType}
         onValueChange={this.props.updateAddPatientFormValue}
         setModalVisible={this._setModalVisible} />
     )
@@ -64,8 +71,7 @@ class PersonalInformationScreen extends Component {
     const { uid } = this.props.user.info;
     const { updateAddPatientFormValue } = this.props;
     const modalId = this.state.modal.id;
-    const input = modalId && add.personalInfo.input.find(input => input.id === modalId)
-    const formIsCompleted = add.personalInfo && add.personalInfo.input.every(input => input.value !== null)
+    const input = modalId && add.referralItems.input.find(input => input.id === modalId)
 
     if (isFetching) {
       return (
@@ -76,36 +82,28 @@ class PersonalInformationScreen extends Component {
     }
 
     return (
-      <View
-        style={{flex: 1}}>
-        <ScrollView
-          style={styles.container}>
+      <ScrollView
+        style={styles.container}>
 
-          <SectionDescription
-            title={add.personalInfo.title}
-            description={add.personalInfo.description} />
+        <SectionDescription
+          title={add.referralItems.title}
+          description={add.referralItems.description} />
 
-          {this._renderFormSection(
-            this._keyExtractor,
-            add.personalInfo.input,
-            this._renderForm)}
+        {this._renderFormSection(
+          this._keyExtractor,
+          add.referralItems.input,
+          this._renderForm)}
 
-          <InputModal
-            id={this.state.modal.id}
-            sectionType={add.personalInfo.sectionType}
-            value={input && input.value}
-            options={input && input.options}
-            onValueChange={updateAddPatientFormValue}
-            setModalVisible={this._setModalVisible}
-            modalVisible={this.state.modal.visible} />
+        <InputModal
+          id={this.state.modal.id}
+          sectionType={add.referralItems.sectionType}
+          value={input && input.value}
+          options={input && input.options}
+          onValueChange={updateAddPatientFormValue}
+          setModalVisible={this._setModalVisible}
+          modalVisible={this.state.modal.visible} />
 
-        </ScrollView>
-
-        {formIsCompleted &&
-        <NextButton
-          onPress={() => this.props.navigation.navigate('ReferralItems')} />}
-
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -125,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, actions)(PersonalInformationScreen);
+export default connect(mapStateToProps, actions)(ReferralItemsScreen);
