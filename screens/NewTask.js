@@ -12,14 +12,11 @@ class NewTaskScreen extends Component {
     return {
       title: 'NewTask',
       headerTitle: 'New Task',
-      //TODO: connect navigation to redux and get care-receiver name
-      //can be String, React Element or React Componen
-      //header: can be React Element or a function --> for customizing headers
     }
   }
 
   componentDidMount() {
-    this.props.fetchPersonalInformationForm();
+    //this.props.fetchPersonalInformationForm();
   }
 
   render() {

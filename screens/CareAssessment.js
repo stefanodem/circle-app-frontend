@@ -56,7 +56,7 @@ const SliderSection = props => {
         step={1}
         minimumValue={min}
         maximumValue={max}
-        thumbTintColor={condition.wasEdited ? getThumbTintColor(value) : 'lightgrey'} />
+        thumbTintColor={condition && condition.wasEdited ? getThumbTintColor(value) : 'lightgrey'} />
     </View>
   )
 }
@@ -151,30 +151,30 @@ class CareAssessmentScreen extends Component {
 
         <SliderSection
           title={"Mood"}
-          condition={conditions["1"]}
+          condition={conditions && conditions["1"]}
           leftIndicatorText={"Sad"}
           rightIndicatorText={"Happy"}
-          value={conditions["1"].input}
+          value={conditions && conditions["1"].input}
           max={5}
           min={1}
           onUpdateValue={updateConditionInput} />
 
         <SliderSection
           title={"Vitality"}
-          condition={conditions["2"]}
+          condition={conditions && conditions["2"]}
           leftIndicatorText={"Faint"}
           rightIndicatorText={"Fit"}
-          value={conditions["2"].input}
+          value={conditions && conditions["2"].input}
           max={5}
           min={1}
           onUpdateValue={updateConditionInput} />
 
         <SliderSection
           title={"Fatigue"}
-          condition={conditions["3"]}
+          condition={conditions && conditions["3"]}
           leftIndicatorText={"Tired"}
           rightIndicatorText={"Energetic"}
-          value={conditions["3"].input}
+          value={conditions && conditions["3"].input}
           max={5}
           min={1}
           onUpdateValue={updateConditionInput} />

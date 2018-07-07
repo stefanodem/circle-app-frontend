@@ -17,7 +17,7 @@ const initialState = {
   vitals: null,
   symptoms: null,
   conditions: null,
-  add: {
+  newPatientForm: {
     personalInfo: null,
     referralItems: null,
   },
@@ -123,8 +123,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        add: {
-          ...state.add,
+        newPatientForm: {
+          ...state.newPatientForm,
           personalInfo: action.addPatientForm.personalInfo,
           referralItems: action.addPatientForm.referralItems,
         }
@@ -132,11 +132,11 @@ export default function(state = initialState, action) {
     case UPDATE_ADD_PATIENT_FORM_VALUE:
       return {
         ...state,
-        add: {
-          ...state.add,
+        newPatientForm: {
+          ...state.newPatientForm,
           [action.sectionType]: {
-            ...state.add[action.sectionType],
-            input: state.add[action.sectionType].input.map(input => {
+            ...state.newPatientForm[action.sectionType],
+            input: state.newPatientForm[action.sectionType].input.map(input => {
               if (input.id === action.inputId) {
                 input.value = action.value;
               }
