@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 import AddPatientForm from './AddPatientForm';
 import { connect } from 'react-redux';
 import * as actions from 'app/actions';
@@ -14,6 +15,16 @@ class ReferralItemsScreen extends Component {
   }
 
   render() {
+    const { isFetching } = this.props.patient;
+
+    if (isFetching) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
+    }
+
     return (
       <AddPatientForm
         section={'referralItems'}
@@ -23,9 +34,8 @@ class ReferralItemsScreen extends Component {
   }
 }
 
-function mapStateToProps({ user, patient }) {
+function mapStateToProps({ patient }) {
   return {
-    user,
     patient,
   }
 }

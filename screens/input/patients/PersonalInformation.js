@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 import AddPatientForm from './AddPatientForm';
 import { connect } from 'react-redux';
 import * as actions from 'app/actions';
@@ -14,11 +15,20 @@ class PersonalInformationScreen extends Component {
   }
 
   componentDidMount() {
-    const { uid } = this.props.user.info;
-    this.props.fetchingAddPatientForm(uid);
+    this.props.fetchingAddPatientForm(this.props.uid);
   }
 
   render() {
+    const { isFetching } = this.props.patient;
+
+    if (isFetching) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
+    }
+
     return (
       <AddPatientForm
         section={'personalInfo'}
@@ -29,8 +39,10 @@ class PersonalInformationScreen extends Component {
 }
 
 function mapStateToProps({ user, patient }) {
+  const { uid } = user.info;
+
   return {
-    user,
+    uid,
     patient,
   }
 }

@@ -4,6 +4,7 @@ import { Card, ListItem, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
+import { SCROLL_PADDING_BOTTOM } from 'app/config';
 
 import { Task, NewTaskButton } from '../components';
 
@@ -13,9 +14,6 @@ class TaskFeedScreen extends Component {
     return {
       title: 'Tasks',
       headerTitle: 'Care Visit',
-      //TODO: connect navigation to redux and get care-receiver name
-      //can be String, React Element or React Componen
-      //header: can be React Element or a function --> for customizing headers
       headerRight: (
         <NewTaskButton
           color="black"
@@ -47,6 +45,7 @@ class TaskFeedScreen extends Component {
   _renderTaskFeed = (keyExtractor, cards, renderTasks) => {
     return (
       <FlatList
+        contentContainerStyle={styles.contentContainer}
         keyExtractor={keyExtractor}
         data={cards}
         renderItem={renderTasks} />
@@ -96,6 +95,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     padding: 0,
     paddingTop: 10,
+  },
+  contentContainer: {
+    paddingBottom: SCROLL_PADDING_BOTTOM,
   },
 });
 

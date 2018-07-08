@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
 import { Task, NewTaskButton } from '../components';
+import { SCROLL_PADDING_BOTTOM } from 'app/config';
 
 const profileTextColor = 'white';
 const profileBackgroundColor = '#ff1654'; //#3949AB, #304FFE, #ff1654
@@ -86,7 +87,8 @@ class PatientProfileScreen extends Component {
         </View>
         <View
           style={{flex: 2, backgroundColor: '#fff'}}>
-          <ScrollView>
+          <ScrollView
+            contentContainerStyle={styles.contentContainer} >
             <ListItem
               roundAvatar
               title={'Description'} />
@@ -164,6 +166,9 @@ const styles = StyleSheet.create({
   }, profileMetrics: {
     fontSize: 16,
     color: profileTextColor,
+  },
+  contentContainer: {
+    paddingBottom: SCROLL_PADDING_BOTTOM,
   },
 });
 

@@ -19,3 +19,5 @@
 // export const setting3 = 300000
 
 export const MIN_COMPOSER_HEIGHT = 33;
+
+export const SCROLL_PADDING_BOTTOM = 30;

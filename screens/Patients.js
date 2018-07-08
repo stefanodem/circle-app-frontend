@@ -5,6 +5,7 @@ import { AddButton } from '../components';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
+import { SCROLL_PADDING_BOTTOM } from 'app/config';
 
 import { Task, NewTaskButton } from '../components';
 
@@ -41,6 +42,7 @@ class PatientsScreen extends Component {
   _renderPatients = (keyExtractor, patient, renderPatients) => {
     return (
       <FlatList
+        contentContainerStyle={styles.contentContainer}
         keyExtractor={keyExtractor}
         data={patient}
         renderItem={renderPatients} />
@@ -122,7 +124,10 @@ const styles = StyleSheet.create({
     padding: 20,
     height: 20,
     //backgroundColor: 'lightgrey',
-  }
+  },
+  contentContainer: {
+    paddingBottom: SCROLL_PADDING_BOTTOM,
+  },
 });
 
 export default connect(mapStateToProps, actions)(PatientsScreen);

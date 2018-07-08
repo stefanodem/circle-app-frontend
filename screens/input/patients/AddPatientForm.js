@@ -5,6 +5,7 @@ import { SectionDescription, PatientInputItem, NextButton, InputModal } from 'ap
 import { connect } from 'react-redux';
 import * as actions from 'app/actions';
 import _values from 'lodash/values';
+import { SCROLL_PADDING_BOTTOM } from 'app/config';
 
 class AddPatientForm extends Component {
   state = {
@@ -34,7 +35,7 @@ class AddPatientForm extends Component {
         label={item.label}
         placeholder={item.placeholder}
         value={item.value}
-        sectionType={newPatientForm[section].sectionType}
+        sectionType={newPatientForm[section] && newPatientForm[section].sectionType}
         onValueChange={this.props.updateAddPatientFormValue}
         setModalVisible={this._setModalVisible} />
     )
@@ -59,12 +60,14 @@ class AddPatientForm extends Component {
     const { isFetching, newPatientForm } = this.props.patient;
     const { updateAddPatientFormValue, section, nextScreen } = this.props;
     const form = newPatientForm[section];
-    const { uid } = this.props.user.info;
     const selectedInputId = this.state.modal.id;
-    const selectedInput = selectedInputId && newPatientForm[section] ? newPatientForm[section].input.find(input => input.id === selectedInputId) : {};
-    const formIsCompleted = newPatientForm[section] && newPatientForm[section].input.every(input => input.value !== null)
+    const selectedInput = selectedInputId && newPatientForm[section]
+                          ? newPatientForm[section].input.find(input => input.id === selectedInputId)
+                          : null;
+    const formIsCompleted = newPatientForm[section] &&
+                            newPatientForm[section].input.every(input => input.value !== null)
 
-    if (isFetching || !form) {
+    if (!form) {
       return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <ActivityIndicator size="large" />
@@ -75,8 +78,10 @@ class AddPatientForm extends Component {
     return (
       <View
         style={{flex: 1}}>
+
         <ScrollView
-          style={styles.container}>
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer} >
 
           <SectionDescription
             title={form.title}
@@ -118,6 +123,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
   },
+  contentContainer: {
+    paddingBottom: SCROLL_PADDING_BOTTOM,
+  }
 });
 
 export default AddPatientForm;
