@@ -59,6 +59,7 @@ class AddPatientForm extends Component {
   render() {
     const { isFetching, newPatientForm } = this.props.patient;
     const { updateAddPatientFormValue, section, nextScreen } = this.props;
+    const { navigate } = this.props.navigation;
     const form = newPatientForm[section];
     const selectedInputId = this.state.modal.id;
     const selectedInput = selectedInputId && newPatientForm[section]
@@ -109,7 +110,7 @@ class AddPatientForm extends Component {
 
         {formIsCompleted &&
           <NextButton
-            onPress={() => this.props.navigation.navigate(nextScreen)} />
+            onPress={() => navigate(nextScreen)} />
         }
 
       </View>

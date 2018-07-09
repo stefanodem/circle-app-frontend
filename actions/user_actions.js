@@ -1,6 +1,7 @@
 import {
   //AUTH_USER,
   //UNAUTH_USER,
+  POSTING,
   FETCHING_USER,
   FETCHING_USER_SUCCESS,
   FETCHING_USER_FAILURE,
@@ -16,11 +17,18 @@ import {
   POSTING_MESSAGE,
   POSTING_MESSAGE_SUCCESS,
   POSTING_MESSAGE_FAILURE,
+  FETCHING_USER_CIRCLE_SUCCESS,
+  FETCHING_USER_CIRCLE_FAILURE,
+  SELECT_CIRCLE_MEMBER,
+  UPDATE_NEW_CHAT_GROUP_NAME,
+  POSTING_CHAT_SUCCESS,
+  POSTING_CHAT_FAILURE,
 } from './types';
 
 import {
-  fetchPatients, fetchInbox, sendMessage,
+  fetchPatients, fetchInbox, sendMessage, fetchCircle, postChat,
 } from '../services/api/user';
+import {NavigationActions} from 'react-navigation';
 
 // export function authUser (uid) {
 //   return {
@@ -73,6 +81,11 @@ import {
 //       .catch((error) => dispatch(fetchingUserFailure(error)))
 //   }
 // }
+function fetchingUser() {
+  return {
+    type: FETCHING_USER,
+  }
+}
 
 function fetchingUserPatients() {
   return {
@@ -154,7 +167,7 @@ export function fetchAndHandleUserInbox(uid) {
 
 function postingMessage() {
   return {
-    type: POSTING_MESSAGE,
+    type: POSTING,
   }
 }
 
@@ -184,4 +197,90 @@ export function sendingMessage(uid, chatId, message) {
   }
 }
 
+const fetchingUserCircleSuccess = (uid, circle) => {
+  return {
+    type: FETCHING_USER_CIRCLE_SUCCESS,
+    uid,
+    circle,
+  }
+}
+
+function fetchingUserCircleFailure(uid, error) {
+  console.warn(error);
+  return {
+    type: FETCHING_USER_CIRCLE_FAILURE,
+    error: `Error fetching circle for user: ${uid}`,
+  }
+}
+
+export const fetchAndHandleUserCircle = (uid) => {
+  return function (dispatch) {
+    dispatch(fetchingUser())
+
+    return fetchCircle(uid)
+      .then((circle) => dispatch(fetchingUserCircleSuccess(uid, circle)))
+      .catch((error) => dispatch(fetchingUserCircleFailure(uid, error)))
+  }
+}
+
+export const selectCircleMember = (memberType, id) => {
+  return {
+    type: SELECT_CIRCLE_MEMBER,
+    memberType,
+    id,
+  }
+}
+
+export const updateNewChatGroupName = (name, rest) => {
+  return {
+    type: UPDATE_NEW_CHAT_GROUP_NAME,
+    name,
+    rest,
+  }
+}
+
+const postingChat = () => {
+  return {
+    type: POSTING,
+  }
+}
+
+const postingChatSuccess = (uid, inbox, timestamp) => {
+  return {
+    type: POSTING_CHAT_SUCCESS,
+    uid,
+    inbox,
+    timestamp,
+  }
+}
+
+const postingChatFailure = (uid, error) => {
+  console.warn(error);
+  return {
+    type: POSTING_CHAT_FAILURE,
+    error: `Error posting chat for user: ${uid}`,
+  }
+}
+
+export const createNewChat = (uid, members, groupSettings, navigation) => {
+  return function (dispatch) {
+    dispatch(postingChat())
+
+    return postChat(uid, members, groupSettings)
+      .then((inbox) => dispatch(postingChatSuccess(uid, inbox, Date.now())))
+      //reset the navigation route to initial route
+      .then(() => navigation.dispatch(
+          NavigationActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({
+                routeName: 'Inbox',
+              }),
+            ],
+          }),
+        )
+      )
+      .catch((error) => dispatch(postingChatFailure(uid, error)))
+  }
+}
 

@@ -1,3 +1,31 @@
+export const userCircle = {
+  caregiver: {
+    2: {
+      name: 'Fridolin Meier',
+      id: 2,
+      type: 'caregiver',
+      avatar: 'https://d30y9cdsu7xlg0.cloudfront.net/png/381743-200.png',
+      selected: false,
+    },
+    3: {
+      name: 'Pipi Langstrumpf',
+      id: 3,
+      type: 'caregiver',
+      avatar: 'https://i.pinimg.com/736x/fc/ce/33/fcce33fcd04253b15d5fe44ebdb28fc9--astrid-lindgren.jpg',
+      selected: false,
+    },
+    4: {
+      name: 'Fifi Lacknagel',
+      id: 4,
+      type: 'caregiver',
+      avatar: 'http://promo.tutotoons.com/icons/large/304-5.png',
+      selected: false,
+    },
+  },
+  patients: null,
+  doctors: null,
+}
+
 export const addPatientForm = {
   personalInfo: {
     title: 'Patient Information',

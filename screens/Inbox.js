@@ -18,11 +18,16 @@ class InboxScreen extends Component {
   }
 
   componentDidMount () {
-    this.props.fetchAndHandleUserInbox('1');
+    if (!this.props.user.chat.inbox) {
+      this.props.fetchAndHandleUserInbox('1');
+    } else {
+      this.props.removeFetchingUserPatients();
+    }
   }
 
   _renderChat = ({ item }) => {
     const { navigate } = this.props.navigation;
+    const lastMessage = item.messages.length > 0 && item.messages[0] ? item.messages[0].text : '';
 
     return (
       <ListItem
@@ -30,9 +35,9 @@ class InboxScreen extends Component {
         onPress={() => navigate('Chat', {chatId: item.id})}
         containerStyle={styles.container}
         roundAvatar
-        avatar={{uri: item.avatar}}
+        avatar={item.avatar ? {uri: item.avatar} : require('app/assets/profile-icon.png')}
         title={item.title ? item.title : _values(item.users)[0].name}
-        subtitle={item.messages[0].text} />
+        subtitle={lastMessage} />
     )
   }
 
@@ -48,9 +53,11 @@ class InboxScreen extends Component {
   }
 
   render() {
-    const {isFetching, error, inbox} = this.props.user;
+    const { isFetching, isPosting, error } = this.props.user;
+    const { inbox } = this.props.user.chat;
+    const { navigate } = this.props.navigation;
 
-    if (isFetching) {
+    if (isFetching || isPosting) {
       return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <ActivityIndicator size="large" />
@@ -63,6 +70,7 @@ class InboxScreen extends Component {
         </View>
       )
     }
+    //console.log(this.props.user)
 
     return (
       <View
@@ -80,7 +88,8 @@ class InboxScreen extends Component {
 
         </ScrollView>
 
-        <AddButton />
+        <AddButton
+          onPress={() => navigate('CircleList')} />
 
       </View>
     );

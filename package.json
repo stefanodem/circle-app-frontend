@@ -2,19 +2,23 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.18.0",
     "expo": "^22.0.0",
     "react": "16.0.0-beta.5",
     "react-native": "https://github.com/expo/react-native/archive/sdk-22.0.2.tar.gz",
-    "react-native-elements": "^0.18.2",
+    "react-native-calendars": "^1.19.3",
+    "react-native-elements": "^0.19.1",
+    "react-native-gifted-chat": "^0.4.3",
+    "react-native-progress": "^3.4.0",
+    "react-native-read-more-text": "^1.0.0",
     "react-navigation": "^1.0.0-beta.19",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-persist": "^5.3.3",
     "redux-thunk": "^2.2.0"
   },
-  "name": "health-app",
+  "name": "app",
   "version": "0.0.0",
-  "description": "Hello Expo!",
+  "description": "App for caregivers",
   "author": null
 }

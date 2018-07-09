@@ -17,7 +17,8 @@ class Chat extends React.Component {
   render() {
     const { chatId } = this.props.navigation.state.params;
     const { uid, name, avatar } = this.props.user.info;
-    const { inbox, isPosting } = this.props.user;
+    const { isPosting } = this.props.user;
+    const { inbox } = this.props.user.chat;
     const { messages } = inbox[chatId];
     const { sendingMessage } = this.props;
 

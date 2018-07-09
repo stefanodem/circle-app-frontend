@@ -1,6 +1,7 @@
 import {
   //AUTH_USER,
   //UNAUTH_USER,
+  POSTING,
   FETCHING_USER,
   FETCHING_USER_SUCCESS,
   FETCHING_USER_FAILURE,
@@ -16,6 +17,12 @@ import {
   POSTING_MESSAGE,
   POSTING_MESSAGE_SUCCESS,
   POSTING_MESSAGE_FAILURE,
+  FETCHING_USER_CIRCLE_SUCCESS,
+  FETCHING_USER_CIRCLE_FAILURE,
+  SELECT_CIRCLE_MEMBER,
+  UPDATE_NEW_CHAT_GROUP_NAME,
+  POSTING_CHAT_SUCCESS,
+  POSTING_CHAT_FAILURE,
 } from '../actions/types';
 
 const initialState = {
@@ -29,8 +36,18 @@ const initialState = {
     uid: '1',
     avatar: 'https://d30y9cdsu7xlg0.cloudfront.net/png/381743-200.png',
   },
+  circle: {
+    patients: null,
+    caregiver: null,
+    doctors: null,
+  },
   patients: null,
-  inbox: null,
+  chat: {
+    inbox: null,
+    newGroupSettings: {
+      name: '',
+    },
+  },
 }
 
 export default function(state = initialState, action) {
@@ -106,7 +123,10 @@ export default function(state = initialState, action) {
       : {
         ...state,
         isFetching: false,
-        inbox: action.inbox,
+        chat: {
+          ...state.chat,
+          inbox: action.inbox,
+        }
       }
     case FETCHING_USER_INBOX_FAILURE:
       return {
@@ -118,6 +138,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
+      };
+    case POSTING:
+      return {
+        ...state,
+        isPosting: true,
       };
     case POSTING_MESSAGE:
       return {
@@ -134,16 +159,19 @@ export default function(state = initialState, action) {
       : {
         ...state,
         isPosting: false,
-        inbox: {
-          ...state.inbox,
-          [action.chatId]: {
-            ...state.inbox[action.chatId],
-            messages: [
-              action.message,
-              ...state.inbox[action.chatId].messages,
-            ],
+        chat: {
+          ...state.chat,
+          inbox: {
+            ...state.chat.inbox,
+            [action.chatId]: {
+              ...state.chat.inbox[action.chatId],
+              messages: [
+                action.message,
+                ...state.chat.inbox[action.chatId].messages,
+              ],
+            }
           }
-        }
+        },
       }
     case POSTING_MESSAGE_FAILURE:
       return {
@@ -151,6 +179,64 @@ export default function(state = initialState, action) {
         isPosting: false,
         error: action.error,
       };
+    case FETCHING_USER_CIRCLE_SUCCESS:
+      return action.circle === null
+      ? {
+        ...state,
+        isFetching: false,
+        error: `Error while fetching circle for user: ${action.uid}`,
+      }
+      : {
+        ...state,
+        isFetching: false,
+        circle: action.circle,
+      }
+    case FETCHING_USER_CIRCLE_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+    case SELECT_CIRCLE_MEMBER:
+      return {
+        ...state,
+        circle: {
+          ...state.circle,
+          [action.memberType]: {
+            ...state.circle[action.memberType],
+            [action.id]: {
+              ...state.circle[action.memberType][action.id],
+              selected: !state.circle[action.memberType][action.id].selected,
+            }
+          }
+        }
+      };
+    case UPDATE_NEW_CHAT_GROUP_NAME:
+      return {
+        ...state,
+        chat: {
+          ...state.chat,
+          newGroupSettings: {
+            ...state.chat.newGroupSettings,
+            name: action.name,
+          }
+        }
+      }
+    case POSTING_CHAT_SUCCESS:
+      return {
+        ...state,
+        isPosting: false,
+        chat: {
+          ...state.chat,
+          inbox: action.inbox,
+        }
+      }
+    case POSTING_CHAT_FAILURE:
+      return {
+        ...state,
+        isPosting: false,
+        error: action.error,
+      }
     default:
       return state;
   }
