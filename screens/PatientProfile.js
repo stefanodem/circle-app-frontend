@@ -24,6 +24,28 @@ class PatientProfileScreen extends Component {
     };
   }
 
+  _renderProfileItem = ({ item }) => {
+    const { navigate } = this.props.navigation;
+
+    return (
+      <ListItem
+        onPress={() => navigate('PatientProfileDetails', { profileItemContent: item.content, profileItemName: item.title })}
+        roundAvatar
+        title={item.title} />
+    )
+  }
+
+  _keyExtractor = (item, index) => item.id
+
+  _renderProfile = (keyExtractor, profile, renderItem) => {
+    return (
+      <FlatList
+        keyExtractor={keyExtractor}
+        data={profile}
+        renderItem={renderItem} />
+    )
+  }
+
   render() {
     const {isFetching, error, patients} = this.props.user;
     const { patientId } = this.props.navigation.state.params;
@@ -58,7 +80,7 @@ class PatientProfileScreen extends Component {
             <Avatar
               large
               rounded
-              source={{uri: patient.avatar }}
+              source={{uri: patient.avatar}}
               //onPress={() => console.log("Works!")}
               activeOpacity={1} />
             <Text
@@ -89,27 +111,12 @@ class PatientProfileScreen extends Component {
           style={{flex: 2, backgroundColor: '#fff'}}>
           <ScrollView
             contentContainerStyle={styles.contentContainer} >
-            <ListItem
-              roundAvatar
-              title={'Description'} />
-            <ListItem
-              roundAvatar
-              title={'Diagnosis'} />
-            <ListItem
-              roundAvatar
-              title={'Care Plan'} />
-            <ListItem
-              roundAvatar
-              title={'Assessments'} />
-            <ListItem
-              roundAvatar
-              title={'Progress'} />
-            <ListItem
-              roundAvatar
-              title={'Circlers'} />
-            <ListItem
-              roundAvatar
-              title={'Contacts'} />
+            {patient
+              ? this._renderProfile(
+                  this._keyExtractor,
+                  _values(patient.profileItem),
+                  this._renderProfileItem)
+              : <Text>{'Error loading patient profile'}</Text>}
           </ScrollView>
         </View>
       </View>

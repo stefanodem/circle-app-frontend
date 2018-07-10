@@ -4,6 +4,7 @@ export TaskDetails from './TaskDetails';
 export Assessment from './Assessment';
 export Patients from './Patients';
 export PatientProfile from './PatientProfile';
+export PatientProfileDetails from './PatientProfileDetails';
 export Inbox from './Inbox';
 export Chat from './Chat';
 export CareAssessment from './CareAssessment';

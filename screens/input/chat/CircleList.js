@@ -61,13 +61,9 @@ class CircleListScreen extends Component {
     )
   }
 
-  _createNewChat = async () => {
-
-  }
-
   render() {
     const {isFetching, error, circle, info } = this.props.user;
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     const selectedMembers = _values(circle.caregiver).filter(member => member.selected);
 
     if (isFetching) {
@@ -99,9 +95,9 @@ class CircleListScreen extends Component {
           ? <View></View>
           : (selectedMembers.length > 1
               ? <NextButton
-                  onPress={() => navigate('GroupSettings')} />
+                  onPress={() => navigation.navigate('GroupSettings')} />
               : <NextButton
-                  onPress={() => this.props.createNewChat(info.uid, selectedMembers, {}, navigate)} />)
+                  onPress={() => this.props.createNewChat(info.uid, selectedMembers, {}, navigation)} />)
         }
 
       </View>

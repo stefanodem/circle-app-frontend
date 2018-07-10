@@ -1,3 +1,5 @@
+const loreIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum"
+
 export const userCircle = {
   caregiver: {
     2: {
@@ -455,6 +457,58 @@ export const patients = {
         avatar: 'https://vignette.wikia.nocookie.net/super-villain/images/9/91/3998596-dr-evil.jpg/revision/latest?cb=20140805055410',
       },
     },
+    profileItem: {
+      1: {
+        id: 1,
+        title: 'Description',
+        content:
+        [
+          {
+            title: 'Personal History',
+            description: loreIpsum,
+            type: 'text',
+          },
+        ],
+      },
+      2: {
+        id: 2,
+        title: 'Diagnosis',
+        content:
+        [
+          {
+            title: 'Vision',
+            description: loreIpsum,
+            type: 'text',
+          },
+          {
+            title: 'Continence',
+            description: loreIpsum,
+            type: 'text',
+          },
+          {
+            title: 'Skin Condition',
+            description: loreIpsum,
+            type: 'text',
+          },
+        ],
+      },
+      3: {
+        id: 3,
+        title: 'Care Plan',
+      },
+      4: {
+        id: 4,
+        title: 'Assessments',
+      },
+      5: {
+        id: 5,
+        title: 'Progress',
+      },
+      6: {
+        id: 6,
+        title: 'Circlers',
+      },
+    },
   },
   2: {
     resourceType: "Patient",
@@ -582,6 +636,58 @@ export const patients = {
         uid: 1,
         name: 'Sarah Miller',
         avatar: 'https://vignette.wikia.nocookie.net/super-villain/images/9/91/3998596-dr-evil.jpg/revision/latest?cb=20140805055410',
+      },
+    },
+    profileItem: {
+      1: {
+        id: 1,
+        title: 'Description',
+        content:
+        [
+          {
+            title: 'Personal History',
+            description: loreIpsum,
+            type: 'text',
+          },
+        ],
+      },
+      2: {
+        id: 2,
+        title: 'Diagnosis',
+        content:
+        [
+          {
+            title: 'Vision',
+            description: loreIpsum,
+            type: 'text',
+          },
+          {
+            title: 'Continence',
+            description: loreIpsum,
+            type: 'text',
+          },
+          {
+            title: 'Skin Condition',
+            description: loreIpsum,
+            type: 'text',
+          },
+        ],
+      },
+      3: {
+        id: 3,
+        title: 'Care Plan',
+      },
+      4: {
+        id: 4,
+        title: 'Assessments',
+      },
+      5: {
+        id: 5,
+        title: 'Progress',
+      },
+      6: {
+        id: 6,
+        title: 'Circlers',
       },
     },
   },

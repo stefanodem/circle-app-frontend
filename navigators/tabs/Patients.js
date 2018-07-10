@@ -1,5 +1,5 @@
 import { StackNavigator } from 'react-navigation';
-import { Patients, PatientProfile, PersonalInformation, ReferralItems } from '../../screens';
+import { Patients, PatientProfile, PersonalInformation, ReferralItems, PatientProfileDetails } from '../../screens';
 
 const options = {
 
@@ -7,9 +7,10 @@ const options = {
 
 export default StackNavigator({
 
-    Patients: { screen: Patients },
-    PatientProfile: { screen: PatientProfile },
-    PersonalInformation: { screen: PersonalInformation },
-    ReferralItems: { screen: ReferralItems },
+  Patients: { screen: Patients },
+  PatientProfile: { screen: PatientProfile },
+  PersonalInformation: { screen: PersonalInformation },
+  ReferralItems: { screen: ReferralItems },
+  PatientProfileDetails: { screen: PatientProfileDetails },
 
 }, options);

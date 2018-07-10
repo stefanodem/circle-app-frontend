@@ -7,7 +7,7 @@ const options = {
 
 export default StackNavigator({
 
-    CareAssessment: { screen: CareAssessment },
-    CareAssessmentInput: { screen: CareAssessmentInput },
+  CareAssessment: { screen: CareAssessment },
+  CareAssessmentInput: { screen: CareAssessmentInput },
 
 }, options);

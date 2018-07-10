@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, AsyncStorage, FlatList, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { AddButton } from '../components';
+import { formatTimestamp } from '../utils';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import _values from 'lodash/values';
@@ -33,7 +34,7 @@ class PatientsScreen extends Component {
         roundAvatar
         avatar={{uri: item.avatar}}
         title={item.name}
-        subtitle={"Next visit: " + item.nextVisit} />
+        subtitle={"Next visit: " + formatTimestamp(item.nextVisit)} />
     )
   }
 
