@@ -7,6 +7,7 @@ import Assessment from './Assessment';
 import Inbox from './Inbox';
 import CareAssessment from './CareAssessment';
 import Calendar from './Calendar';
+import Settings from './Settings';
 
 // Tabs
 import Tab from '../../components/tabs/tab'
@@ -33,6 +34,6 @@ export default TabNavigator({
     Groups:     { screen: Inbox, navigationOptions: { tabBarLabel: 'Inbox', tabBarIcon: (props) => (<Tab {...props} icon="chat" />) }},
     User:       { screen: Patients, navigationOptions: { tabBarLabel: 'Patients', tabBarIcon: (props) => (<Tab {...props} icon="person" />) }},
     Stats:      { screen: Assessment, navigationOptions: { tabBarLabel: 'My Care', tabBarIcon: (props) => (<Tab {...props} icon="show-chart" />) }},
-    Admin:      { screen: Assessment, navigationOptions: { tabBarLabel: 'Settings', tabBarIcon: (props) => (<Tab {...props} icon="settings" />) }},
+    Admin:      { screen: Settings, navigationOptions: { tabBarLabel: 'Settings', tabBarIcon: (props) => (<Tab {...props} icon="settings" />) }},
 
 }, options);

@@ -11,3 +11,4 @@ export CareAssessment from './CareAssessment';
 export CareAssessmentInput from './CareAssessmentInput';
 export Calendar from './Calendar';
 export * from './input';
+export Settings from './Settings';

@@ -1,5 +1,52 @@
 const loreIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum"
 
+export const settings = {
+  general: {
+    id: 1,
+    name: 'general',
+    title: 'General',
+    settings: [],
+    type: '',
+    icon: {
+      name: 'settings',
+      color: 'grey',
+    },
+  },
+  account: {
+    id: 2,
+    name: 'account',
+    title: 'Account',
+    settings: [],
+    type: '',
+    icon: {
+      name: 'account',
+      color: 'grey',
+    },
+  },
+  notifications: {
+    id: 3,
+    name: 'notifications',
+    title: 'Notifications',
+    settings: [],
+    type: '',
+    icon: {
+      name: 'bell',
+      color: 'red',
+    },
+  },
+  tasks: {
+    id: 4,
+    name: 'tasks',
+    title: 'Tasks',
+    settings: [],
+    type: '',
+    icon: {
+      name: 'calendar-check',
+      color: 'green',
+    },
+  }
+}
+
 export const userCircle = {
   caregiver: {
     2: {
