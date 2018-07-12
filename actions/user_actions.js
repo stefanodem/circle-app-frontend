@@ -23,10 +23,17 @@ import {
   UPDATE_NEW_CHAT_GROUP_NAME,
   POSTING_CHAT_SUCCESS,
   POSTING_CHAT_FAILURE,
+  FETCHING_USER_PROGRESS_SUCCESS,
+  FETCHING_USER_PROGRESS_FAILURE,
 } from './types';
 
 import {
-  fetchPatients, fetchInbox, sendMessage, fetchCircle, postChat,
+  fetchPatients,
+  fetchInbox,
+  sendMessage,
+  fetchCircle,
+  postChat,
+  fetchUserProgress,
 } from '../services/api/user';
 import {NavigationActions} from 'react-navigation';
 
@@ -281,6 +288,32 @@ export const createNewChat = (uid, members, groupSettings, navigation) => {
         )
       )
       .catch((error) => dispatch(postingChatFailure(uid, error)))
+  }
+}
+
+const fetchingUserProgressSuccess = (uid, progress) => {
+  return {
+    type: FETCHING_USER_PROGRESS_SUCCESS,
+    uid,
+    progress,
+  }
+}
+
+const fetchingUserProgressFailure = (uid, error) => {
+  console.warn(error);
+  return {
+    type: FETCHING_USER_PROGRESS_FAILURE,
+    error: `Error fetching progress for user: ${uid}`,
+  }
+}
+
+export const fetchAndHandleUserProgress = (uid) => {
+  return function (dispatch) {
+    dispatch(fetchingUser())
+
+    return fetchUserProgress(uid)
+      .then((progress) => dispatch(fetchingUserProgressSuccess(uid, progress)))
+      .catch((error) => dispatch(fetchingUserProgressFailure(uid, error)))
   }
 }
 

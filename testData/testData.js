@@ -1,5 +1,62 @@
 const loreIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.  Duis aute irure dolorin reprehenderit in voluptate velit esse cillum dolore eu fugiatnulla pariatur. Excepteur sint occaecat cupidatat non proident,sunt in culpa qui officia deserunt mollit anim id est laborum"
 
+export const progress = {
+  visits: {
+    id: 1,
+    name: 'visits',
+    title: 'Visits',
+    description: 'An overview about your patient visits.',
+    type: 'visits',
+    metrics: [
+      {
+        id: 1,
+        title: 'Total',
+        type: 'numeric',
+        value: 23,
+      },
+      {
+        id: 2,
+        title: 'Completed',
+        type: 'progress-circle',
+        value: 0.77,
+      },
+      {
+        id: 3,
+        title: 'Open',
+        type: 'numeric',
+        value: 7,
+      },
+    ],
+  },
+  tasks: {
+    id: 2,
+    name: 'tasks',
+    title: 'Tasks',
+    description: 'An overview about your tasks.',
+    type: 'tasks',
+    metrics: [
+      {
+        id: 1,
+        title: 'Total',
+        type: 'numeric',
+        value: 123,
+      },
+      {
+        id: 2,
+        title: 'Completed',
+        type: 'progress-circle',
+        value: 0.77,
+      },
+      {
+        id: 3,
+        title: 'Open',
+        type: 'numeric',
+        value: 36,
+      },
+    ],
+  },
+}
+
 export const settings = {
   general: {
     id: 1,

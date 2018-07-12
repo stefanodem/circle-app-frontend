@@ -23,6 +23,8 @@ import {
   UPDATE_NEW_CHAT_GROUP_NAME,
   POSTING_CHAT_SUCCESS,
   POSTING_CHAT_FAILURE,
+  FETCHING_USER_PROGRESS_SUCCESS,
+  FETCHING_USER_PROGRESS_FAILURE,
 } from '../actions/types';
 
 const initialState = {
@@ -48,6 +50,7 @@ const initialState = {
       name: '',
     },
   },
+  progress: null,
 }
 
 export default function(state = initialState, action) {
@@ -237,6 +240,24 @@ export default function(state = initialState, action) {
         isPosting: false,
         error: action.error,
       }
+    case FETCHING_USER_PROGRESS_SUCCESS:
+      return action.progress === null
+      ? {
+        ...state,
+        isFetching: false,
+        error: `Error while fetching progress for user: ${action.uid}`,
+      }
+      : {
+        ...state,
+        isFetching: false,
+        progress: action.progress,
+      }
+    case FETCHING_USER_PROGRESS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
     default:
       return state;
   }
